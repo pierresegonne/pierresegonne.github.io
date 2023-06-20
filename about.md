@@ -22,8 +22,15 @@ I am an engineer and (data) science enthusiast. I am interested in understanding
 
 ### Work Experience
 
-* 2021 - Present: __Data Scientist__ ([Electricity Maps](https://electricitymaps.com/))
+* 2023 - : __Tech Lead__ ([Electricity Maps](https://electricitymaps.com/))
   * Electricity Maps' mission is to organise the world's electricity data to drive the transition towards a truly decarbonised electricity system.
+  * Leading the development of Electricity Maps data platform. Focus areas:
+    * Automation of data quality processes
+    * Unifying our data offering from historical, to real-time, to forecasted electricity data.
+    * The ambition is to become the single source of truth for electricity data.
+  * Leading the expansion of the forecasting infrastructure. Running more than a 1000 models simultaneously.
+<div></div>
+* 2021 - 2022: __Data Scientist__ ([Electricity Maps](https://electricitymaps.com/))
   * Responsible for ensuring that ElectricityMaps' data is accurate, reliable, and timely.
   * Owning the building of the modelling infrastructure to power our estimation and forecast systems. These models allow for large scale load-shifting from e.g [Google](https://blog.google/outreach-initiatives/sustainability/carbon-aware-computing-location/).
 <div></div>
