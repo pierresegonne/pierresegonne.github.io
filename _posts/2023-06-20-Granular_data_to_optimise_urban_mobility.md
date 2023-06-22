@@ -264,6 +264,8 @@ It was first observed that **the electrification of transportation within the ci
 
 \[10\]: [https://ev-database.org/cheatsheet/energy-consumption-electric-car](https://ev-database.org/cheatsheet/energy-consumption-electric-car)
 
+Header photo by [Tanya Pro](https://unsplash.com/@tannnpro?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/O2JsA_nz4pQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
 ## Appendix
 
 ### Distribution of electricity consumption per charger
