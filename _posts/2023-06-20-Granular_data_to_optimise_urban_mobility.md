@@ -300,7 +300,7 @@ With $$C_k$$ the total amount of energy charged for the event k, we have:
 
 $$\begin{aligned}\mathbf{A}_{ub} = \begin{bmatrix}1 & 0 & \dots & 0 \\\vdots & \ddots & \ddots & \vdots \\ \vdots  & & \ddots  & 0 \\1 & \dots & \dots & 1\end{bmatrix}, \quad\mathbf{b}_{ub} = \begin{bmatrix} C_k\\ \vdots \\ C_k \\ \end{bmatrix}\end{aligned}$$
 
-* $$\mathbf{A}_{eq}$$ is the matrix of equality constraints and $$\mathbf{b}_{eq}$$ is the vector of equality constraints. Here, $$\mathbf{A}_{eq}$$ and $$\mathbf{b}_{eq}$$ are used to express the constraint of having a full battery at the end of the optimisation window.
+* $$\mathbf{A}_{eq}$$ is the matrix of equality constraints and $$\mathbf{b}_{eq}$$ is the vector of equality constraints. Here, $$\mathbf{A}_{eq}$$ and $$\mathbf{b}_{eq}$$ are used to express the constraint of having charged the battery by $$C_k$$, as in the scenario without smart charging.
 
 $$\begin{aligned}\mathbf{A}_{eq} = \begin{bmatrix}1 & \dots & 1 \\0 & \dots & 0 \\\vdots & & \vdots \\0 & \dots & 0\end{bmatrix}, \quad\mathbf{b}_{eq} = \begin{bmatrix} C_k \\0 \\\vdots \\0 \\\end{bmatrix}\end{aligned}$$
 
