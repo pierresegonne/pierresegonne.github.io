@@ -8,7 +8,7 @@ share: True
 
 TL;DR TODO
 
-## Title
+## A sense of scale for our thirst for fire
 
 For most of us, fossil fuels are intangible. We come close to their physicality when refueling a car, but even then, we don't even see liter after liter of gasoline beeing poured into the tank. It is hidden from our sight. We turn on the engine, move on, never to see the exhaust gases.
 
@@ -52,16 +52,35 @@ Werner Herzog's Lessons of Darkness exposes a myriad of open shots of burning oi
     <span style="color: #666; font-size: 13px; font-style: italic;"><b>Figure 4:</b> Lessons of Darkness, 1992, Werner Herzog.</span>
 </div>
 
-For days after seeing this movie, that vision stuck with me. I was shaken to witness that oil fields in that region of Kuweit were so numerous that lighting them on fire would recreate our age-old vision of hell on earth. I couldn't help but wonder - how many oil fields are there? I knew that Kuweit that an expectionally oil-rich country, and was thus curious to understand if that vision of nightmare could have happened in other places. Luckily, satellite imagery can help us answer that question.
+For days after seeing this movie, that vision stuck with me. I was shaken to witness that oil fields in that region of Kuweit were so numerous that lighting them on fire would recreate our age-old vision of hell on earth. I couldn't help but wonder - how many oil fields are there? I knew Kuweit as an expectionally oil-rich country, and was thus lead to wonder if that vision of nightmare could have happened in other places. It could have, tells us satellite imagery, many times over. My first exploration of the desolate plains of the Permian Basin (Western Texas, Figure 4.) through Google Maps clearly marked the second occasion in which the scale of our usage of fossil fuels imbued me. For hundreds of kilometers on end, the satellite images seem to be corrupted by a silicon-like pattern of white segments and squares. A closer look unveils the nature of that phenomenon. The systematic and overwhelming covering of the bare land in a digital, articulated and orderly network is the result of the deliberate covering of the geological deposit by an unfathomable number of oil fields, systematically laid down to maxime the extraction rate of the oil resting underneath.
 
 <div id="html" markdown="0" style="display: flex; flex-direction: column; align-items: center; margin: 16px 0 32px;">
-    <img src="../../resources/posts/2024-04-10/TX_large.png" style="width: 100%; overflow: hidden; margin: 16px 0;">
-    <img src="../../resources/posts/2024-04-10/TX_small.png" style="width: 100%; overflow: hidden; margin: 16px 0;">
-    <img src="../../resources/posts/2024-04-10/TX_streetview.png" style="width: 100%; overflow: hidden; margin: 16px 0;">
-    <span style="color: #666; font-size: 13px; font-style: italic;"><b>Figure 2:</b> Distribution of charging durations per charger for the two stations. Top represents Adolph Steens Allé, bottom TEC.</span>
+    <div style="display: flex; margin: 16px 0;">
+        <img src="../../resources/posts/2024-04-10/TX_large.png" style="width: 100%; overflow: hidden; margin: 16px 0;">
+        <img src="../../resources/posts/2024-04-10/TX_small.png" style="width: 100%; overflow: hidden; margin: 16px 0;">
+    </div>
+    <div style="display: flex; justify-content: center; margin: 0 0 16px 0;">
+       <img src="../../resources/posts/2024-04-10/TX_streetview.png" style="width: 100%; overflow: hidden; margin: 16px 0;">
+    </div>
+    <span style="color: #666; font-size: 13px; font-style: italic;"><b>Figure 4:</b> Exploring the Permian Basin with the help of Google Maps.</span>
 </div>
 
-Was shocked by the size of the area covered - decided to use that to share that sense of scale
+That vision left a lasting impression on me. Captivated by this vision of a landscape simultaneously cursed and blessed, I wanted to use readily available tools to rationalise it. __Can we train a computer vision model to detect and count all of these oil fields?__ Can it help us cristallise that subjective impression, was I left to wonder.
+
+## Building a model to detect oil fields
+
+TODO
+
+## Counting the oil fields in the Permian Basin
+
+TODO
+
+## Conclusion
+
+Blablabla
+
+## References
+
 
 * [1] [EIA Annual petroleum and other liquids production](https://www.eia.gov/international/data/world/petroleum-and-other-liquids/annual-petroleum-and-other-liquids-production?pd=5&p=0000000000000000000000000000000000vg&u=0&f=A&v=mapbubble&a=-&i=none&vo=value&&t=C&g=00000000000000000000000000000000000000000000000001&l=249-ruvvvvvfvtvnvv1vrvvvvfvvvvvvfvvvou20evvvvvvvvvvnvvvs0008&s=94694400000&e=1704067200000)
 * [2] [Hamback surface mine](https://en.wikipedia.org/wiki/Hambach_surface_mine)
