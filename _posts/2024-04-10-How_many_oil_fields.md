@@ -67,17 +67,42 @@ For days after seeing this movie, that vision stuck with me. I was shaken to wit
 
 That vision left a lasting impression on me. Captivated by this vision of a landscape simultaneously cursed and blessed, I wanted to use readily available tools to rationalise it. __Can we train a computer vision model to detect and count all of these oil fields?__ Can it help us cristallise that subjective impression, was I left to wonder.
 
-## Building a model to detect oil fields
 
-TODO
 
-## Counting the oil fields in the Permian Basin
+## Counting all the oil fields within the Permian Basin
 
-TODO
+<div id="html" markdown="0" style="display: flex; flex-direction: column; align-items: center; margin: 16px 0 32px;">
+    <img src="../../resources/posts/2024-04-10/task_breakdown.jpg" style="width: 100%; overflow: hidden; margin: 16px 0;">
+    <span style="color: #666; font-size: 13px; font-style: italic;"><b>Figure 4:</b> Task breakdown.</span>
+</div>
+
+### Building and training a model to identify oil wells from satellite images
+
+Luckily for me, I was not the first one who thought about training a machine learning model to detect oil fields from the growing body of available satellite imagery. This idea would actually have been short lived if no labeled dataset of oil derricks was available; on my own, trying to get a precise answer to this absurd question would have required too large an investment to carry on.
+
+In 2021, Z. Wang et al published a paper called "An Oil Well Dataset Derived from Satellite‐Based Remote Sensing" [1] sharing their foundational work on assembling as large a dataset as possible of labeled satellite images from Daqing City in China, called _Northeast Petroleum University–Oil Well Object Detection Version 1.0 (NEPU–OWOD V1.0)_. In all, they were able to gather 432 images containing in total 1192 identified oil wells.
+
+Specifically, the oil wells are identified thanks to the above ground infrastructure, with the distinctive pumpjack appearing clearly on most images. Pumpjacks are quite ubiquitous for onshore oil wells (need reference). They are a quintessential design for the pump required to bring the oil from the underground reservoir to the surface. As a result, the aspect of the pumpjacks present in the NEPU dataset resembles rather closely their American counterparts, providing hope for being able to transfer learning from the NEPU dataset to satellite images mapping the Texan soil. Their aspect is distinctive, with clear-cut features like the shape of the hammer, and sizes ranging 6-12 meters long, 2-5 meters wide and 5-12 meters high, which make their detection possible from space. Typical resolution for satellite images ranging from 0.30 centimeters(Pleiades Neo) to 10 meters (Landsat).
+
+<div id="html" markdown="0" style="display: flex; flex-direction: column; align-items: center; margin: 16px 0 32px;">
+    <div style="display: flex; margin: 16px 0;">
+        <img src="../../resources/posts/2024-04-10/pumpjack.jpg" style="width: 100%; overflow: hidden; margin: 16px 0;">
+        <img src="../../resources/posts/2024-04-10/0_28.jpg" style="width: 100%; overflow: hidden; margin: 16px 0;">
+        <img src="../../resources/posts/2024-04-10/TX_32.201697,-102.5714027.png" style="width: 100%; overflow: hidden; margin: 16px 0;">
+    </div>
+    <span style="color: #666; font-size: 13px; font-style: italic;"><b>Figure 4:</b> Exploring the Permian Basin with the help of Google Maps.</span>
+</div>
+
+
+* YoloV5
+* ClearML
+* Colab worker queue
 
 ## Conclusion
 
 Blablabla
+
+Throwback to Herzog's vision. It's just a hint at the true scale of what's happening every second on earth. We are secretly unleashing this hellish fire, 50000 times over, hidden within engines, boilers and smelters. What would prometheus think about us?
 
 ## References
 
