@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Let's play a game - count the oil fields
+title: Prometheus's pride; making sense of our thirst for fire
 comments: True
 share: True
 ---
@@ -8,7 +8,9 @@ share: True
 
 TL;DR TODO
 
-## A sense of scale for our thirst for fire
+## Prometheus
+
+## Our thirst for fire
 
 For most of us, fossil fuels are intangible. We come close to their physicality when refueling a car, but even then, we don't even see liter after liter of gasoline beeing poured into the tank. It is hidden from our sight. We turn on the engine, move on, never to see the exhaust gases.
 
@@ -62,10 +64,14 @@ For days after seeing this movie, that vision stuck with me. I was shaken to wit
     <div style="display: flex; justify-content: center; margin: 0 0 16px 0;">
        <img src="../../resources/posts/2024-04-10/TX_streetview.png" style="width: 100%; overflow: hidden; margin: 16px 0;">
     </div>
-    <span style="color: #666; font-size: 13px; font-style: italic;"><b>Figure 4:</b> Exploring the Permian Basin with the help of Google Maps.</span>
+    <span style="color: #666; font-size: 13px; font-style: italic;"><b>Figure 5:</b> Exploring the Permian Basin with the help of Google Maps.</span>
 </div>
 
 That vision left a lasting impression on me. Captivated by this vision of a landscape simultaneously cursed and blessed, I wanted to use readily available tools to rationalise it. __Can we train a computer vision model to detect and count all of these oil fields?__ Can it help us cristallise that subjective impression, was I left to wonder.
+
+<div id="html" markdown="0" style="display: flex; flex-direction: column; align-items: center;">
+    <span style="color: #666; font-size: 45px; font-style: italic; margin-bottom: 10px;">. . .</span>
+</div>
 
 
 
@@ -73,30 +79,63 @@ That vision left a lasting impression on me. Captivated by this vision of a land
 
 <div id="html" markdown="0" style="display: flex; flex-direction: column; align-items: center; margin: 16px 0 32px;">
     <img src="../../resources/posts/2024-04-10/task_breakdown.jpg" style="width: 100%; overflow: hidden; margin: 16px 0;">
-    <span style="color: #666; font-size: 13px; font-style: italic;"><b>Figure 4:</b> Task breakdown.</span>
+    <span style="color: #666; font-size: 13px; font-style: italic;"><b>Figure 6:</b> Breaking down the task of using machine learning for counting all oil derricks of the Permian Basin.</span>
 </div>
 
 ### Building and training a model to identify oil wells from satellite images
 
 Luckily for me, I was not the first one who thought about training a machine learning model to detect oil fields from the growing body of available satellite imagery. This idea would actually have been short lived if no labeled dataset of oil derricks was available; on my own, trying to get a precise answer to this absurd question would have required too large an investment to carry on.
 
-In 2021, Z. Wang et al published a paper called "An Oil Well Dataset Derived from Satellite‐Based Remote Sensing" [1] sharing their foundational work on assembling as large a dataset as possible of labeled satellite images from Daqing City in China, called _Northeast Petroleum University–Oil Well Object Detection Version 1.0 (NEPU–OWOD V1.0)_. In all, they were able to gather 432 images containing in total 1192 identified oil wells.
+In 2021, Z. Wang et al published a paper called "An Oil Well Dataset Derived from Satellite‐Based Remote Sensing" [1] sharing their foundational work on assembling as large a dataset as possible of labeled satellite images from Daqing City in China, called _Northeast Petroleum University–Oil Well Object Detection Version 1.0 (NEPU–OWOD V1.0)_. In all, they were able to gather 432 images containing a total of 1192 identified oil wells, which are available publicly.
 
-Specifically, the oil wells are identified thanks to the above ground infrastructure, with the distinctive pumpjack appearing clearly on most images. Pumpjacks are quite ubiquitous for onshore oil wells (need reference). They are a quintessential design for the pump required to bring the oil from the underground reservoir to the surface. As a result, the aspect of the pumpjacks present in the NEPU dataset resembles rather closely their American counterparts, providing hope for being able to transfer learning from the NEPU dataset to satellite images mapping the Texan soil. Their aspect is distinctive, with clear-cut features like the shape of the hammer, and sizes ranging 6-12 meters long, 2-5 meters wide and 5-12 meters high, which make their detection possible from space. Typical resolution for satellite images ranging from 0.30 centimeters(Pleiades Neo) to 10 meters (Landsat).
+Specifically, the oil wells are identified thanks to the above ground infrastructure, with the distinctive pumpjack appearing clearly on most images. Pumpjacks are quite ubiquitous for onshore oil wells [3]. They are a quintessential design for the pump required to bring the oil from the underground reservoir to the surface. As a result, the aspect of the pumpjacks present in the NEPU dataset resembles rather closely their American counterparts, providing hope for being able to transfer learning from the NEPU dataset to satellite images mapping the Texan soil. Their aspect is distinctive, with clear-cut features like the shape of the hammer, and sizes ranging 6-12 meters long, 2-5 meters wide and 5-12 meters high, which make their detection possible from space. Typical resolution for satellite images ranging from 0.30 centimeters (Pleiades Neo) to 10 meters (Landsat).
 
 <div id="html" markdown="0" style="display: flex; flex-direction: column; align-items: center; margin: 16px 0 32px;">
-    <div style="display: flex; margin: 16px 0;">
-        <img src="../../resources/posts/2024-04-10/pumpjack.jpg" style="width: 100%; overflow: hidden; margin: 16px 0;">
-        <img src="../../resources/posts/2024-04-10/0_28.jpg" style="width: 100%; overflow: hidden; margin: 16px 0;">
-        <img src="../../resources/posts/2024-04-10/TX_32.201697,-102.5714027.png" style="width: 100%; overflow: hidden; margin: 16px 0;">
+    <div style="display: flex; justify-content: center; margin: 0 0 16px 0;">
+       <img src="../../resources/posts/2024-04-10/pumpjack.jpg" style="width: 50%; overflow: hidden; margin: 16px 0;">
     </div>
-    <span style="color: #666; font-size: 13px; font-style: italic;"><b>Figure 4:</b> Exploring the Permian Basin with the help of Google Maps.</span>
+    <div style="display: flex; margin: 16px 0;">
+        <img src="../../resources/posts/2024-04-10/0_28.jpg" style="width: 75%; overflow: hidden; margin: 0 0 16px 0;">
+        <img src="../../resources/posts/2024-04-10/TX_32.201697,-102.5714027.png" style="width: 75%; overflow: hidden; margin: 0 0 16px 0;">
+    </div>
+    <span style="color: #666; font-size: 13px; font-style: italic;"><b>Figure 7:</b> Pumpjacks. Upclose, as seen from the air for the NEPU dataset (bottom left) and from Google Maps in Texas (bottom right).</span>
 </div>
 
+The organisation of the dataset is clear enough to investigate directly models for identifying the shape of the pump jacks within the different satellite images. Each image is bundled with a metadata file containing the coordinates (x,y) pixel-wise of areas containing all pump jacks.
+
+```
+# YOLOv5 🚀 by Ultralytics, AGPL-3.0 license
+# NEPU dataset - NEPU-OWOD V1.0 (Northeast Petroleum University—Oil Well Object Detection V1.0)
+# https://drive.google.com/drive/folders/1bGOAcASCPGKKkyrBDLXK9rx_cekd7a2u
+# Example usage: python train.py --data NEPU.yaml
+# parent
+# ├── yolov5
+# └── datasets
+#     └── NEPU
+
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: ../datasets/NEPU # dataset root dir
+train: images/train # train images (relative to 'path')
+val: images/val # val images (relative to 'path')
+test: images/test # test images (optional)
+
+# Classes
+names:
+  0: oil well
+
+nc: 1
+
+# Download script/URL (optional)
+download: https://storage.googleapis.com/pierre-test-public/oil-riggery/NEPU.zip
+```
 
 * YoloV5
 * ClearML
 * Colab worker queue
+
+### Assembling a dataset of satellite images covering the Permian Basin
+
+
 
 ## Conclusion
 
@@ -104,8 +143,12 @@ Blablabla
 
 Throwback to Herzog's vision. It's just a hint at the true scale of what's happening every second on earth. We are secretly unleashing this hellish fire, 50000 times over, hidden within engines, boilers and smelters. What would prometheus think about us?
 
+_This post has been written in bursts between 2022 and 2024, after work hours and during rainy weekends. I'm glad to see that new initiatives attempting to do the same have emerged. TODO: provide extra links/refs/examples (ex: tar sands one - https://arxiv.org/html/2410.09032v1)
+
 ## References
 
 
 * [1] [EIA Annual petroleum and other liquids production](https://www.eia.gov/international/data/world/petroleum-and-other-liquids/annual-petroleum-and-other-liquids-production?pd=5&p=0000000000000000000000000000000000vg&u=0&f=A&v=mapbubble&a=-&i=none&vo=value&&t=C&g=00000000000000000000000000000000000000000000000001&l=249-ruvvvvvfvtvnvv1vrvvvvfvvvvvvfvvvou20evvvvvvvvvvnvvvs0008&s=94694400000&e=1704067200000)
 * [2] [Hamback surface mine](https://en.wikipedia.org/wiki/Hambach_surface_mine)
+* [3] [An Oil Well Dataset Derived from Satellite-Based Remote Sensing](https://www.researchgate.net/publication/350121503_An_Oil_Well_Dataset_Derived_from_Satellite-Based_Remote_Sensing)
+* [4] [Old stuff from the oil fields - Pumping jacks](http://www.sjvgeology.org/old_stuff/pumpjacks.html)
