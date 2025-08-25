@@ -39,7 +39,7 @@ You should notice the following badge in the top-left corner.
 There are three level of carbon intensity, which have the following effects on what is rendered:
 
 - **Low**: The full content of the website is shown.
-- **Medium**: The website is rendered in black and white, with reduced quality images.
+- **Moderate**: The website is rendered in black and white, with reduced quality images.
 - **High**: Images are completely hidden, as well as the disqus comments under the posts. Everything is rendered in black and white.
 
 A picture is worth a thousand words, so I'd encourage you to test it out directly. Open the console and run the following
@@ -50,8 +50,8 @@ opening the browser console and running:
 // Test high carbon level
 window.carbonAwareManager.setCarbonLevel('high');
 
-// Test medium carbon level
-window.carbonAwareManager.setCarbonLevel('medium');
+// Test moderate carbon level
+window.carbonAwareManager.setCarbonLevel('moderate');
 
 // Test low carbon level
 window.carbonAwareManager.setCarbonLevel('low');
