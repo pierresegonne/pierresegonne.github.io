@@ -9,14 +9,11 @@ class CarbonAwareManager {
     }
 
     init() {
-        // Store all images and comments on page load
         this.captureImages();
         this.captureComments();
 
-        // Create the overlay container
         this.createOverlay();
 
-        // Initialize Carbon Aware Website with callback (no badge display)
         if (typeof caw !== 'undefined') {
             caw.render({
                 target: "carbon-aware-widget",
@@ -27,10 +24,8 @@ class CarbonAwareManager {
     }
 
     captureImages() {
-        // Get all images that are currently loaded
         this.images = Array.from(document.querySelectorAll('img'));
 
-        // Set up observer for dynamically added images
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
                 mutation.addedNodes.forEach((node) => {
@@ -51,10 +46,8 @@ class CarbonAwareManager {
     }
 
     captureComments() {
-        // Get all comment-related elements including Disqus
         this.comments = Array.from(document.querySelectorAll('#disqus_thread, .comments, .comment, .disqus_thread, [id*="comment"], [class*="comment"]'));
 
-        // Set up observer for dynamically added comments
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
                 mutation.addedNodes.forEach((node) => {
@@ -67,7 +60,6 @@ class CarbonAwareManager {
                             }
                         }
 
-                        // Check for comment elements within the added node
                         const newComments = node.querySelectorAll ? node.querySelectorAll('#disqus_thread, .comments, .comment, .disqus_thread, [id*="comment"], [class*="comment"]') : [];
                         newComments.forEach(comment => {
                             if (!this.comments.includes(comment)) {
@@ -89,29 +81,23 @@ class CarbonAwareManager {
         this.currentZone = zone;
         this.currentLevel = level;
 
-        // Update the overlay indicator
         this.updateOverlayIndicator(zone, level);
 
-        // Update background color
         this.updateBackgroundColor(level);
 
-        // Apply image policy
         this.applyImagePolicyToAll();
 
-        // Apply comment policy
         this.applyCommentPolicyToAll();
 
-        // Apply content styling
         this.applyContentStyling(level);
 
-        // Ensure overlay elements are not affected by content styling
         this.resetOverlayStyling();
     }
 
     updateBackgroundColor(level) {
         const colors = {
             'high': '#ffffff',                  // Keep white for high (black and white mode)
-            'medium': '#ffffff',                // Keep white for medium
+            'moderate': '#ffffff',                // Keep white for medium
             'low': '#F9F7F1'                    // Light beige
         };
 
@@ -129,50 +115,41 @@ class CarbonAwareManager {
     applyImagePolicy(img) {
         if (!this.currentLevel) return;
 
-        // Skip overlay images
         if (img.closest('#carbon-aware-overlay') || img.classList.contains('carbon-overlay-image')) {
             return;
         }
 
         switch (this.currentLevel) {
             case 'high':
-                // Hide images completely
                 img.style.display = 'none';
                 img.setAttribute('data-carbon-hidden', 'true');
                 break;
 
-                        case 'medium':
-                // Show images with reduced quality and black/white filter
+            case 'moderate':
                 img.style.display = 'block';
                 img.style.filter = 'grayscale(100%)';
                 img.removeAttribute('data-carbon-hidden');
 
-                // Reduce image quality by 50% if possible
                 if (img.naturalWidth && img.naturalHeight) {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
 
-                    // Reduce dimensions by 50%
                     canvas.width = img.naturalWidth * 0.5;
                     canvas.height = img.naturalHeight * 0.5;
 
-                    // Draw image at reduced quality
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-                    // Convert back to data URL with reduced quality
                     const reducedQualityUrl = canvas.toDataURL('image/jpeg', 0.5);
                     img.src = reducedQualityUrl;
                 }
                 break;
 
             case 'high':
-                // Hide images completely but keep black/white styling for visible content
                 img.style.display = 'none';
                 img.setAttribute('data-carbon-hidden', 'true');
                 break;
 
             case 'low':
-                // Show images normally
                 img.style.display = 'block';
                 img.style.filter = 'none';
                 img.removeAttribute('data-carbon-hidden');
@@ -185,24 +162,20 @@ class CarbonAwareManager {
 
         switch (this.currentLevel) {
             case 'high':
-                // Hide comments completely
                 comment.style.display = 'none';
                 comment.setAttribute('data-carbon-hidden', 'true');
 
-                // Also hide any iframes within the comment element (for Disqus)
                 const hiddenIframes = comment.querySelectorAll('iframe');
                 hiddenIframes.forEach(iframe => {
                     iframe.style.display = 'none';
                 });
                 break;
 
-            case 'medium':
+            case 'moderate':
             case 'low':
-                // Show comments normally
                 comment.style.display = 'block';
                 comment.removeAttribute('data-carbon-hidden');
 
-                // Show iframes within the comment element
                 const visibleIframes = comment.querySelectorAll('iframe');
                 visibleIframes.forEach(iframe => {
                     iframe.style.display = '';
@@ -215,24 +188,19 @@ class CarbonAwareManager {
         const contentElements = document.querySelectorAll('body *:not(img):not(.comments):not(.comment):not(.disqus_thread)');
 
         contentElements.forEach(element => {
-            if (level === 'medium' || level === 'high') {
-                // Apply black and white filter to content for both medium and high
+            if (level === 'moderate' || level === 'high') {
                 element.style.filter = 'grayscale(100%)';
             } else {
-                // Remove black and white filter
                 element.style.filter = '';
             }
         });
     }
 
     resetOverlayStyling() {
-        // Reset all overlay elements to their original styling
         const overlay = document.getElementById('carbon-aware-overlay');
         if (overlay) {
-            // Reset the main overlay container
             overlay.style.filter = '';
 
-            // Reset all child elements
             const overlayElements = overlay.querySelectorAll('*');
             overlayElements.forEach(element => {
                 element.style.filter = '';
@@ -243,21 +211,17 @@ class CarbonAwareManager {
 
 
     createOverlay() {
-        // Find the wrapper-masthead container
         const masthead = document.querySelector('.wrapper-masthead');
         if (!masthead) {
             console.warn('Could not find .wrapper-masthead container, retrying...');
-            // Retry after a short delay
             setTimeout(() => this.createOverlay(), 100);
             return;
         }
 
-        // Check if overlay already exists
         if (document.getElementById('carbon-aware-overlay')) {
             return;
         }
 
-        // Create overlay container
         const overlay = document.createElement('div');
         overlay.id = 'carbon-aware-overlay';
         overlay.innerHTML = `
@@ -280,7 +244,6 @@ class CarbonAwareManager {
             </div>
         `;
 
-        // Add styles
         const style = document.createElement('style');
         style.textContent = `
             .wrapper-masthead {
@@ -434,13 +397,11 @@ class CarbonAwareManager {
         document.head.appendChild(style);
         masthead.appendChild(overlay);
 
-        // Add toggle functionality
         const toggle = document.getElementById('carbon-toggle');
         toggle.addEventListener('change', (e) => {
             this.setCarbonAwareMode(e.target.checked);
         });
 
-        // Store reference to overlay
         this.overlay = overlay;
     }
 
@@ -454,14 +415,14 @@ class CarbonAwareManager {
         }
 
         if (intensityElement) {
-            // Create more descriptive text based on level
             let intensityText = 'Detecting...';
+            // Levels are defined here https://portal.electricitymaps.com/developer-hub/api/reference#latest-carbon-intensity-level
             if (level) {
                 switch (level) {
                     case 'low':
                         intensityText = 'LOW EMISSIONS';
                         break;
-                    case 'medium':
+                    case 'moderate':
                         intensityText = 'AVERAGE EMISSIONS';
                         break;
                     case 'high':
@@ -489,12 +450,10 @@ class CarbonAwareManager {
 
     setCarbonAwareMode(enabled) {
         if (enabled) {
-            // Re-apply current carbon level settings
             if (this.currentLevel) {
                 this.handleCarbonLevel(this.currentZone, this.currentLevel);
             }
         } else {
-            // Disable carbon aware mode - restore normal appearance
             document.body.style.backgroundColor = '';
             this.images.forEach(img => {
                 img.style.display = '';
@@ -510,7 +469,6 @@ class CarbonAwareManager {
                 });
             });
 
-            // Remove black and white filter from content
             const contentElements = document.querySelectorAll('body *:not(img):not(.comments):not(.comment):not(.disqus_thread)');
             contentElements.forEach(element => {
                 element.style.filter = '';
@@ -518,21 +476,16 @@ class CarbonAwareManager {
         }
     }
 
-    // Public method to manually override carbon level (for testing)
     setCarbonLevel(level) {
         this.handleCarbonLevel('test-zone', level);
     }
 }
 
-// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     window.carbonAwareManager = new CarbonAwareManager();
 });
 
-// Also initialize if DOM is already loaded (for some edge cases)
 if (document.readyState === 'loading') {
-    // DOM is still loading, wait for DOMContentLoaded
 } else {
-    // DOM is already loaded, initialize immediately
     window.carbonAwareManager = new CarbonAwareManager();
 }
