@@ -6,14 +6,15 @@ share: True
 date: 2025-08-22
 ---
 
-During one of Electricity Map's hack-a-volt, my colleague [Ronan](https://ronan-mch.github.io/) developed a plug-and-play integration to make a website carbon aware.
+During one of Electricity Maps' hack-a-volt, my colleague [Ronan](https://ronan-mch.github.io/) developed a plug-and-play integration to make a website carbon aware.
 
-Under the hood what happens is that:
+All you need is to insert this script into your website's head:
 
-- A Cloudflare Worker queries the [carbon-intensity-level API](https://portal.electricitymaps.com/developer-hub/api/reference#latest-carbon-intensity-level) with the latitude and longitude of the Cloudflare request. That allows to guess the grid zone in which the user is located.
-- A frontend library calls this worker and renders a HTML snippet.
+```js
+<script src="https://storage.googleapis.com/carbon-aware-websites-javascript/frontend.js"></script>
+```
 
-From this, we can insert a callback into the provided widget and start controlling what happens on the rendered webpage
+And then you'll be able to access the carbon-aware widget:
 
 ```js
 caw.render({
@@ -22,6 +23,22 @@ caw.render({
       showBadge: false
 });
 ```
+
+Under the hood what happens is that:
+
+- A Cloudflare Worker queries the Electricity Maps [carbon-intensity-level API](https://portal.electricitymaps.com/developer-hub/api/reference#latest-carbon-intensity-level) with the latitude and longitude of the Cloudflare request. That allows to guess the grid zone in which the user is located.
+- A frontend library calls this worker and renders a HTML snippet.
+
+The widget comes with an pre-packaged rendered visual (just need to specify `showBadge: true` in the widget call):
+
+<div id="html" markdown="0" style="display: flex; flex-direction: column; align-items: center; margin: 16px 0 32px;">
+    <img src="../../resources/posts/2025-08-22/badge.png" style="width: 60%; overflow: hidden; margin: 16px 0;">
+    <span style="color: #666; font-size: 13px; font-style: italic;">
+        Pre-packaged carbon aware badge
+    </span>
+</div>
+
+For those who want to use the widget to control the website dynamically, a callback function can be injected in the render call.
 
 Based on this callback, and some javascript shenanigans, I was able to make this website carbon aware in about an hour. Note that my front-end development days are far gone, so I guess that a web developper could probably do this much more efficiently.
 
