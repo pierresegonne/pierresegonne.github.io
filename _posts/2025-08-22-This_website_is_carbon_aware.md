@@ -20,7 +20,7 @@ And then you'll be able to access the carbon-aware widget:
 caw.render({
       target: "carbon-aware-widget",
       callback: (zone, level) => this.handleCarbonLevel(zone, level),
-      showBadge: false
+      render: false
 });
 ```
 
