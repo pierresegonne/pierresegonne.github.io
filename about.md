@@ -8,7 +8,7 @@ permalink: /about/
 
 I am an engineer and (data) science enthusiast. I am interested in understanding how learning processes can uncover hidden mechanics of the universe, be that through data science, complex systems, or energy dynamics.
 
-[CV](../resources/CV_PierreSegonne.pdf) <span style="color: #666; font-size: 13px; font-style: italic;">Last updated - 2020/03</span>
+[CV](../resources/CV_PierreSegonne.pdf) <span style="color: #666; font-size: 13px; font-style: italic;">Last updated - 2026/10</span>
 
 ### Education
 
@@ -20,8 +20,9 @@ I am an engineer and (data) science enthusiast. I am interested in understanding
 <br>
 * Preparatory school, [Lycée Ste Geneviève](https://www.bginette.com/), 2015
 
-### Work Experience
+<!-- ### Work Experience -->
 
+<!-- *
 * 2023 - : __Tech Lead__ ([Electricity Maps](https://electricitymaps.com/))
   * Electricity Maps' mission is to organise the world's electricity data to drive the transition towards a truly decarbonised electricity system.
   * Leading the development of Electricity Maps data platform. Focus areas:
@@ -40,7 +41,7 @@ I am an engineer and (data) science enthusiast. I am interested in understanding
 * 2020 - 2021 (part-time): __Data Scientist__ ([Tomorrow](https://www.tmrow.com/))
   * Tomorrow's mission is to build tools to empower people to take climate action.
   * Automating the generation of total carbon footprints, for both [North](https://www.tmrow.com/blog/sunsetting-north/) a carbon accounting app and [Bloom](https://www.tmrow.com/blog/closing-down-the-bloom-chapter/), a carbon-accounting SaaS.
-  * Powering models with accurate emission factors.
+  * Powering models with accurate emission factors. -->
 
 ### Publications
 
