@@ -1,6 +1,7 @@
 ---
 title: "A Polar visualisation of prime numbers"
 slug: PP_Numbers
+description: "Projecting prime numbers onto a 2D plane in polar coordinates reveals surprising structure. Includes the matplotlib code to reproduce the image."
 date: 2020-10-25
 ---
 Prime numbers exhibit an interesting structure. Projecting them onto a 2D plane results in:

@@ -45,7 +45,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
     {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
     {modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
 
-    <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/feed.xml" />
+    <link rel="alternate" type="application/atom+xml" title={SITE.name} href="/feed.xml" />
     <link rel="icon" href="/images/favicon/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png" />

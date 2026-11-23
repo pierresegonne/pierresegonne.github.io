@@ -1,6 +1,7 @@
 ---
 title: "Trains in Europe, experiences, tips and tricks"
 slug: Trains_in_Europe
+description: "Slides on travelling across Europe by train: experiences, practical tips and tricks."
 date: 2023-10-12
 ---
 <div class="embed">

@@ -1,6 +1,7 @@
 ---
 title: "Normalizing flows are not magic"
 slug: Normalizing_flows
+description: "How normalizing flows turn a simple distribution into a flexible approximate posterior for variational inference, with planar and radial flows illustrated."
 date: 2020-06-27
 ---
 :::figure

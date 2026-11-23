@@ -205,6 +205,16 @@ Done on `rewrite-astro`. Notes:
 2. `sitemap-index.xml` + a `robots.txt` pointing to it. Exclude the hidden share pages and the 404 page.
 3. URL check: crawl the live site's `sitemap.xml` and assert that every URL returns 200 on the new build. Add redirect stubs for anything that changes.
 
+Done on `rewrite-astro`. Notes:
+- `/feed.xml` is an Atom feed (`src/pages/feed.xml.ts`), like jekyll-feed's, with the same entry ids (`https://pierresegonne.com/<Slug>`, no trailing slash), so subscribers don't see old posts again.
+  - It carries full content for all 13 posts (the old feed had the latest 10).
+  - Posts are rendered with Astro's container API, URLs are made absolute, responsive-image attributes are dropped, and maths ships as MathML only (KaTeX's HTML layer is removed).
+  - It's about 330 KB.
+- Meta descriptions and feed summaries come from each post's first real paragraph (`src/utils/excerpt.ts`).
+  - Three posts have a hand-written `description` because their opening is a code link, a colon lead-in or only a slides embed: Normalizing_flows, PP_Numbers, Trains_in_Europe.
+- `robots.txt` points to `/sitemap-index.xml`. `/sitemap.xml`, the old path, also serves a sitemap index. The sitemap lists the 16 public pages; the 404 page, the feed and the share pages are excluded.
+- `scripts/legacy-urls.txt` snapshots the 32 URLs the Jekyll site served (sitemap, feed, share links, CVs, favicons). `pnpm check:urls` fails if any is missing from `dist/`. All resolve except `/photography/`, which was removed on purpose.
+
 ### Phase 5: CI/CD and deploy
 1. Add a GitHub Actions workflow: install → `astro check` → build → lychee link check → Lighthouse CI (budget from §2) → `actions/upload-pages-artifact` → `actions/deploy-pages`.
 2. Repo settings → Pages → source: **GitHub Actions** (instead of legacy branch build). The custom domain and HTTPS cert stay the same.

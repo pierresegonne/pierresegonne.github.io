@@ -51,7 +51,9 @@ export default defineConfig({
     katexAssets(),
     mdx(),
     // Hidden share pages live in public/ as plain .html files, so they never enter the sitemap.
-    sitemap({ filter: (page) => new URL(page).pathname !== '/404/' }),
+    sitemap({
+      filter: (page) => !['/404/', '/feed.xml/', '/sitemap.xml/'].includes(new URL(page).pathname),
+    }),
   ],
   markdown: {
     // Unified (remark/rehype) processor rather than Astro 7's default Satteri,
