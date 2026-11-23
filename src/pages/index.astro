@@ -1,15 +1,20 @@
 ---
-// Phase 1 placeholder: replaced by the post list in Phase 2/3.
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pierre Segonne</title>
-  </head>
-  <body>
-    <h1>Pierre Segonne</h1>
-    <p>Site rewrite in progress.</p>
-  </body>
-</html>
+<BaseLayout>
+  <h1>Posts</h1>
+  <ul class="post-list">
+    {posts.map((post) => (
+      <li>
+        <time datetime={post.data.date.toISOString().slice(0, 10)}>{fmt(post.data.date)}</time>
+        <h2><a href={`/${post.id}/`}>{post.data.title}</a></h2>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

@@ -129,6 +129,21 @@ Done on `rewrite-astro` with Astro 7.4. Notes:
 4. Hidden share pages: rebuild `/Karavshin-expedition-report-2026/` and `/Pensees-kirghizes/` as `noindex` redirect pages excluded from the sitemap (sitemap `filter`). Their files stay at `/resources/share/...`.
 5. Old CV PDF (`CV_PierreSegonne_old.pdf`): keep it if anything links to it, otherwise delete it.
 
+Done on `rewrite-astro`. Notes:
+- Posts live in `src/content/posts/<Slug>/index.md`, with their images next to them. Filenames were made ASCII-safe (e.g. `Adolph_Steens_Alle_*.png`).
+- Figures use `:::figure{width="60%"}` directives (`src/plugins/remark-figures.mjs`): a paragraph of images forms a row, and other paragraphs form the caption. There are also `:::callout` (boxed aside) and `:::meta` (small muted note, used for footnotes and "last updated" lines).
+- The plugin sets an accurate `sizes` on every image. With `image.layout: 'constrained'`, images get a srcset, so phones no longer download 3000px originals. Animated GIFs become animated WebP.
+- Maths uses kramdown semantics (`$$` inline or block, a lone `$` is literal). Inline-fenced display blocks were split onto their own lines. KaTeX output matches the Jekyll MathJax count on every post. Attractors' two equations are now display equations, as intended.
+- Hand-fixed: the Attractors and Tutorial side-by-side blocks (now stacked image then text), the footnotes, the tables (styles dropped), the Colab badges, the meetings email template, and the carbon-aware update note (now a callout).
+- Alt text is derived from captions. Four images have no caption and got filename-based alt text: Tech_lead `pillars`/`boundaries`/`cables` and the Granular header photo. **TODO:** write proper alt text.
+- Unreferenced files moved along but not deployed (they could be deleted): `thats_all_folk.jpeg`, the Attractors `*.json`, `principles_header.jpeg`, `roles.excalidraw`, `emissions_all.png`, two `tanya-pro-*` variants, `Colab_queue_chang_runtime.png`.
+- About is MDX (the portrait goes through `<Image>`; the commented-out work history is kept as an MDX comment, so it is no longer shipped). Talks is Markdown, and 404 is an Astro page. Photography is gone (`/photography/` now returns a 404).
+- The share pages are plain HTML in `public/`, so their URLs are unchanged and they stay out of the sitemap.
+- Every URL from the old sitemap resolves in the new build, except `/photography/`.
+- After editing a remark/rehype plugin, delete `.astro/`. Astro caches rendered Markdown there.
+- KaTeX CSS currently loads on every post. Load it only on posts with maths (Phase 3).
+- Jekyll can no longer build on this branch (it trips over `node_modules`). That's fine: Phase 5 removes it.
+
 ### Phase 3: Layout and design system (Navy & Ember)
 Source: `docs/design/README.md`, `renewal-outline.md`, `components/*`, `tokens.css`.
 

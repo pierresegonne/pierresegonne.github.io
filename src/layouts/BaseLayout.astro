@@ -1,0 +1,34 @@
+---
+// Minimal shell for the content migration. Design (Navy & Ember) lands in Phase 3.
+import '../styles/migration.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+const { title, description = 'Lead Engineer', canonical } = Astro.props;
+const fullTitle = title ? `${title} – Pierre Segonne` : 'Pierre Segonne – Lead Engineer';
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+  </head>
+  <body>
+    <header>
+      <a href="/">Pierre Segonne</a>
+      <nav><a href="/">Posts</a> <a href="/talks/">Talks</a> <a href="/about/">About</a></nav>
+    </header>
+    <main id="content">
+      <slot />
+    </main>
+  </body>
+</html>
