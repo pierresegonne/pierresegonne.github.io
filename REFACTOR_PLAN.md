@@ -109,6 +109,11 @@ Fix the broken integration and the cheapest checklist items now, without waiting
 4. Move `CNAME`, favicons, `resources/*.pdf` and `resources/share/*` to `public/` **at the same paths**.
 5. Update `.gitignore` (`node_modules`, `dist`, `.astro`) and stop ignoring `package.json`.
 
+Done on `rewrite-astro` with Astro 7.4. Notes:
+- Astro 7's default Markdown processor (Satteri) has no maths support. The config uses `unified()` from `@astrojs/markdown-remark` so remark-math and rehype-katex run.
+- `astro check` doesn't support TypeScript 7 yet, so TypeScript is pinned to 6.
+- **Don't merge `rewrite-astro` into `master` before Phase 5.** Jekyll still deploys from `master`, and `CNAME`, the favicons, the CVs and the share files now live in `public/`.
+
 ### Phase 2: Migrate content
 1. Define a `posts` content collection schema: `title`, `date`, `updated?`, `description?`, `canonical?`, `draft?`, `math?` (auto-detected is fine too).
 2. Move the 13 posts to `src/content/posts/`. For each post:
@@ -123,6 +128,21 @@ Fix the broken integration and the cheapest checklist items now, without waiting
 3. Pages: About (rewrite the inline styles, and move the avatar to an optimised `<Image>`), Talks, 404. Decide whether **Photography** is dropped or rebuilt as a static gallery. It is currently hidden and Tumblr-dependent, so dropping it is recommended.
 4. Hidden share pages: rebuild `/Karavshin-expedition-report-2026/` and `/Pensees-kirghizes/` as `noindex` redirect pages excluded from the sitemap (sitemap `filter`). Their files stay at `/resources/share/...`.
 5. Old CV PDF (`CV_PierreSegonne_old.pdf`): keep it if anything links to it, otherwise delete it.
+
+Done on `rewrite-astro`. Notes:
+- Posts live in `src/content/posts/<Slug>/index.md`, with their images next to them. Filenames were made ASCII-safe (e.g. `Adolph_Steens_Alle_*.png`).
+- Figures use `:::figure{width="60%"}` directives (`src/plugins/remark-figures.mjs`): a paragraph of images forms a row, and other paragraphs form the caption. There are also `:::callout` (boxed aside) and `:::meta` (small muted note, used for footnotes and "last updated" lines).
+- The plugin sets an accurate `sizes` on every image. With `image.layout: 'constrained'`, images get a srcset, so phones no longer download 3000px originals. Animated GIFs become animated WebP.
+- Maths uses kramdown semantics (`$$` inline or block, a lone `$` is literal). Inline-fenced display blocks were split onto their own lines. KaTeX output matches the Jekyll MathJax count on every post. Attractors' two equations are now display equations, as intended.
+- Hand-fixed: the Attractors and Tutorial side-by-side blocks (now stacked image then text), the footnotes, the tables (styles dropped), the Colab badges, the meetings email template, and the carbon-aware update note (now a callout).
+- Alt text is derived from captions. The four uncaptioned photos (three in Tech_lead, the Granular header) have hand-written descriptions.
+- Unreferenced files moved along but not deployed (they could be deleted): `thats_all_folk.jpeg`, the Attractors `*.json`, `principles_header.jpeg`, `roles.excalidraw`, `emissions_all.png`, two `tanya-pro-*` variants, `Colab_queue_chang_runtime.png`.
+- About is MDX (the portrait goes through `<Image>`; the commented-out work history is kept as an MDX comment, so it is no longer shipped). Talks is Markdown, and 404 is an Astro page. Photography is gone (`/photography/` now returns a 404).
+- The share pages are plain HTML in `public/`, so their URLs are unchanged and they stay out of the sitemap.
+- Every URL from the old sitemap resolves in the new build, except `/photography/`.
+- After editing a remark/rehype plugin, delete `.astro/`. Astro caches rendered Markdown there.
+- KaTeX CSS currently loads on every post. Load it only on posts with maths (Phase 3).
+- Jekyll can no longer build on this branch (it trips over `node_modules`). That's fine: Phase 5 removes it.
 
 ### Phase 3: Layout and design system (Navy & Ember)
 Source: `docs/design/README.md`, `renewal-outline.md`, `components/*`, `tokens.css`.
@@ -159,10 +179,41 @@ Source: `docs/design/README.md`, `renewal-outline.md`, `components/*`, `tokens.c
 7. **Signature behaviour** (guide principle 8): the carbon-aware widget is gone. If you want a replacement, pick something static and zero-JS; otherwise none. **Your call.**
 8. **Checks**: tick every box in `docs/design/issues-to-fix.md`, then do the squint test and check widths of 375, 640, 1024 and 1440px plus 200% zoom.
 
+Done on `rewrite-astro`. Notes:
+- IBM Plex is self-hosted through Astro 7's Fonts API (Fontsource provider, Latin subset, metric-matched fallbacks). That's 8 files, 176 KB in total, with Serif 400 and Sans 700 preloaded.
+- Site CSS is inlined in every page (`build.inlineStylesheets: 'always'`), and pages ship no JavaScript.
+- KaTeX CSS and fonts are copied to `public/katex/` (git-ignored) by `src/integrations/katex-assets.mjs`. They load only on the 6 posts with maths, which also preload exactly the KaTeX fonts each post uses (`src/utils/katex-fonts.ts`).
+- Shiki uses `github-light-default`, whose colours match the design tokens and all pass AA. The old `github-light` orange (3.5:1) failed.
+- Links in running text are underlined, at reduced opacity until hover. Lighthouse flagged colour-only links (WCAG 1.4.1).
+- Content fixes: heading levels (Load_shifting, Tech_lead had an in-body `#`, Principles), four "here" links reworded, three links moved to https, and the moved Kosiorek article link updated. The sjvgeology link stays http (no https available).
+- Lighthouse (mobile, simulated slow 4G):
+  - 100/100/100/100 on home, Talks and About.
+  - 97–99 performance on content posts.
+  - Normalizing_flows is the exception at 88–93: in 2 of 3 runs a CLS of 0.127 appears when KaTeX fonts land after first paint. Accepted.
+  - Load_shifting's EV photo is only 275px wide at the source (best practices 96).
+- Checklist (`docs/design/issues-to-fix.md`):
+  - Done: A1–A7, C1–C3, C5, T1, T3–T5, L2, L3, P1–P6, S1–S3.
+  - No longer applicable: C4, L1 and T2 (the carbon widget and share bar are gone).
+- **Frame image: B chosen** after the A/B test. The A/B compared ESA Sentinel-2 crops against a generated look-alike.
+  - The bands are generated by `scripts/generate-frame.py`, which is seeded and reproducible, and written to `src/assets/frame/`.
+  - They need no credit, so the ESA crops, the `PUBLIC_FRAME` switch and the footer credit are gone.
+  - They are AVIF, 12 KB (header) and 20 KB (footer).
+  - On ≤640px the masthead image is anchored left, so nothing hot sits behind the name (C5).
+
 ### Phase 4: Feeds, SEO and URL continuity
 1. RSS/Atom at **`/feed.xml`** (the same path as jekyll-feed, so existing subscribers keep working), with full content.
 2. `sitemap-index.xml` + a `robots.txt` pointing to it. Exclude the hidden share pages and the 404 page.
 3. URL check: crawl the live site's `sitemap.xml` and assert that every URL returns 200 on the new build. Add redirect stubs for anything that changes.
+
+Done on `rewrite-astro`. Notes:
+- `/feed.xml` is an Atom feed (`src/pages/feed.xml.ts`), like jekyll-feed's, with the same entry ids (`https://pierresegonne.com/<Slug>`, no trailing slash), so subscribers don't see old posts again.
+  - It carries full content for all 13 posts (the old feed had the latest 10).
+  - Posts are rendered with Astro's container API, URLs are made absolute, responsive-image attributes are dropped, and maths ships as MathML only (KaTeX's HTML layer is removed).
+  - It's about 330 KB.
+- Meta descriptions and feed summaries come from each post's first real paragraph (`src/utils/excerpt.ts`).
+  - Three posts have a hand-written `description` because their opening is a code link, a colon lead-in or only a slides embed: Normalizing_flows, PP_Numbers, Trains_in_Europe.
+- `robots.txt` points to `/sitemap-index.xml`. `/sitemap.xml`, the old path, also serves a sitemap index. The sitemap lists the 16 public pages; the 404 page, the feed and the share pages are excluded.
+- `scripts/legacy-urls.txt` snapshots the 32 URLs the Jekyll site served (sitemap, feed, share links, CVs, favicons). `pnpm check:urls` fails if any is missing from `dist/`. All resolve except `/photography/`, which was removed on purpose.
 
 ### Phase 5: CI/CD and deploy
 1. Add a GitHub Actions workflow: install → `astro check` → build → lychee link check → Lighthouse CI (budget from §2) → `actions/upload-pages-artifact` → `actions/deploy-pages`.
@@ -170,6 +221,23 @@ Source: `docs/design/README.md`, `renewal-outline.md`, `components/*`, `tokens.c
 3. Delete the Jekyll files: `_config.yml`, `_layouts/`, `_includes/`, `_sass/`, `style.scss`, `css/`, `js/`, `index.html`, `*.md` pages, `Gemfile`.
 4. Rewrite `README.md`: `pnpm i`, `pnpm dev`, how to write a post, how to add a hidden share file.
 5. Merge `rewrite-astro` → `master`, then check the live site with Lighthouse and test the feed in a reader.
+
+Done on `rewrite-astro`. Notes:
+- `.github/workflows/deploy.yml` runs on PRs (checks only) and on pushes to `master` (checks, then deploy):
+  1. `pnpm build` (`astro check` + build)
+  2. `pnpm check:urls` and `pnpm check:links`
+  3. Lighthouse CI, with reports uploaded as a private workflow artifact rather than public storage
+  4. `upload-pages-artifact`, then `deploy-pages`
+- The link check is `scripts/check-links.mjs`, an offline check of internal links, images and feed URLs, instead of lychee. External links aren't fetched, so flaky third-party sites can't break deploys.
+- Lighthouse budgets (`lighthouserc.json`):
+  - Errors: accessibility, best practices or SEO below 95, or any JavaScript.
+  - Warnings: performance below 90, CLS above 0.1, HTML over 30 KB.
+  - Locally, only Normalizing_flows warns (perf 89, CLS 0.127, see Phase 3).
+- Removed: `_config.yml`, `_layouts/`, `_includes/`, `_sass/`, `style.scss`, `css/`, `index.html`, `images/404.jpg`, `images/avatar.jpg`, and `LICENSE` (Jekyll Now's theme licence).
+- **Cutover order (important):**
+  1. Switch Settings → Pages → Source to **GitHub Actions**.
+  2. Merge the PR. The first push to `master` deploys the new site.
+  - Merging first would leave the legacy Jekyll builder failing on the Astro repo. The old deployment would stay live, but no new site would go out until the source is switched.
 
 ### Phase 6: Optional follow-ups
 - Repo size: the 5–10 MB source PNGs stay in git history. If size matters, compress or replace the originals (the pipeline makes optimised copies anyway), or rewrite history with `git filter-repo`. Rewriting history is destructive, so only do it deliberately.
@@ -187,7 +255,7 @@ Source: `docs/design/README.md`, `renewal-outline.md`, `components/*`, `tokens.c
 | Footer links | **Decided** | Email, GitHub, LinkedIn. Twitter/X, Stack Overflow and Medium dropped; all Twitter mentions removed from the site |
 | Fonts | **Decided** | IBM Plex, self-hosted (set by the design guide) |
 | Carbon-aware post | **Decided** | Keep title and URL, add the update note (done) |
-| Frame image | **Decided** | A/B at the end of Phase 3: re-cropped ESA Sentinel-2 originals at high resolution vs a generated look-alike |
+| Frame image | **Decided** | B: generated look-alike (`scripts/generate-frame.py`); ESA crops and credit removed |
 | Static site generator | **Decided** | Astro |
 | Photography page | **Decided** | Drop |
 | Share buttons | **Decided** | Drop |
@@ -195,4 +263,4 @@ Source: `docs/design/README.md`, `renewal-outline.md`, `components/*`, `tokens.c
 | Signature behaviour replacing the carbon widget | **Decided** | None |
 
 ## 5. Inputs still needed
-- Approval to download the ESA source TIFF (88.8 MB) when Phase 3 reaches the frame image.
+- None for Phases 4-5.

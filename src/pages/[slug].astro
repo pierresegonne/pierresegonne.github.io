@@ -1,0 +1,20 @@
+---
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../layouts/PostLayout.astro';
+import { extraKatexFonts } from '../utils/katex-fonts';
+import { excerpt } from '../utils/excerpt';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+// Only posts with maths load the KaTeX stylesheet.
+const math = post.body?.includes('$$') ?? false;
+const mathFonts = math ? extraKatexFonts(post.rendered?.html) : [];
+---
+<PostLayout {...post.data} description={post.data.description ?? excerpt(post.body)} math={math} mathFonts={mathFonts}>
+  <Content />
+</PostLayout>

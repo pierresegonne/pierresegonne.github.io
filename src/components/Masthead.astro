@@ -1,0 +1,81 @@
+---
+import FrameBand from './FrameBand.astro';
+import header from '../assets/frame/header.png';
+import { SITE } from '../site';
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === '/' ? path === '/' || !SITE.nav.some((n) => n.href !== '/' && path.startsWith(n.href)) && !path.startsWith('/404') : path.startsWith(href);
+---
+<FrameBand image={header} as="header" class="masthead" narrowPosition="left center">
+  <div class="container inner">
+    <div class="identity">
+      <a class="site-name" href="/">{SITE.name}</a>
+      <p class="tagline">{SITE.tagline}</p>
+    </div>
+    <nav aria-label="Main">
+      {SITE.nav.map((item) => (
+        <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+  </div>
+</FrameBand>
+
+<style>
+  .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-l);
+    padding-block: var(--space-l);
+  }
+  .site-name {
+    font: 400 var(--text-site-name) / 1.7 var(--sans); /* C5: 400, not 300 */
+    letter-spacing: 1px;
+    color: var(--ember);
+    text-decoration: none;
+  }
+  .site-name:hover {
+    color: var(--ember);
+    text-decoration: none;
+  }
+  .tagline {
+    margin: calc(-1 * var(--space-xs)) 0 0;
+    font: 400 1rem / 1.4 var(--sans);
+    color: var(--on-night);
+  }
+  nav {
+    display: flex;
+    gap: var(--space-l);
+    margin-top: 23px;
+    font: 300 var(--text-body) / 1.4 var(--sans);
+    letter-spacing: 1px;
+  }
+  nav a {
+    color: var(--nav-on-night); /* C3: same colour at every width */
+    text-decoration: none;
+  }
+  nav a:hover,
+  nav a[aria-current='page'] {
+    color: var(--on-night);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 1px;
+  }
+  @media (max-width: 640px) {
+    .inner {
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      text-align: center;
+    }
+    .tagline {
+      margin: 3px 0;
+    }
+    nav {
+      margin-top: 9px;
+      gap: var(--space-s) var(--space-l);
+      font-size: 1rem;
+    }
+  }
+</style>

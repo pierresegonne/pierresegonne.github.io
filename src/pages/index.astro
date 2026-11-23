@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatDate, isoDate } from '../utils/format';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+<BaseLayout>
+  <h1>Posts</h1>
+  <ol class="post-list" reversed>
+    {posts.map((post) => (
+      <li>
+        <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date, 'short')}</time>
+        <h2><a href={`/${post.id}/`}>{post.data.title}</a></h2>
+      </li>
+    ))}
+  </ol>
+</BaseLayout>
+
+<style>
+  h1 {
+    color: var(--ink-max);
+    margin-top: 0.75em;
+  }
+  .post-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    margin: 0;
+    padding-top: var(--space-s);
+    border-bottom: 1px solid var(--hairline);
+  }
+  li:last-child {
+    border-bottom: none;
+  }
+  time {
+    font-size: var(--text-small);
+    color: var(--ink-muted);
+  }
+  h2 {
+    margin: 0 0 var(--space-m);
+  }
+  h2 a {
+    color: var(--ink-strong);
+  }
+  h2 a:hover {
+    color: var(--link-hover);
+  }
+</style>

@@ -1,0 +1,35 @@
+# URLs of the Jekyll site (sitemap of 2026-11-23 plus feed, share links and static files).
+# scripts/check-urls.mjs fails the build if any of them is missing from dist/.
+# Intentionally removed: /photography/ (page dropped in the redesign).
+/
+/3D_scatterplot/
+/404.html
+/Attractors/
+/CNAME
+/Granular_data_to_optimise_urban_mobility/
+/How_many_oil_fields/
+/Karavshin-expedition-report-2026
+/Load_shifting_car_charge/
+/Normalizing_flows/
+/PP_Numbers/
+/Pensees-kirghizes
+/Principles/
+/Saying_no_to_meetings/
+/Tech_lead/
+/This_website_is_carbon_aware/
+/Trains_in_Europe/
+/Tutorial_react_form/
+/about/
+/feed.xml
+/images/favicon/apple-touch-icon.png
+/images/favicon/favicon-16x16.png
+/images/favicon/favicon-32x32.png
+/images/favicon/favicon.ico
+/images/favicon/site.webmanifest
+/resources/CV_PierreSegonne.pdf
+/resources/CV_PierreSegonne_old.pdf
+/resources/share/Karavshin-expedition-report-2026.pdf
+/resources/share/Pensees-kirghizes.epub
+/robots.txt
+/sitemap.xml
+/talks/

@@ -1,0 +1,36 @@
+---
+// Layout for Markdown/MDX pages in src/pages (About, Talks).
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  frontmatter: { title: string; description?: string };
+}
+const { frontmatter } = Astro.props;
+---
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <article class="page">
+    <h1>{frontmatter.title}</h1>
+    <slot />
+  </article>
+</BaseLayout>
+
+<style>
+  .page :global(.portrait) {
+    float: right;
+    width: 200px;
+    margin: 0 0 var(--space-m) var(--space-l);
+    border-radius: var(--radius-round);
+    filter: grayscale(1);
+  }
+  .page :global(h2) {
+    clear: both;
+  }
+  @media (max-width: 640px) {
+    .page :global(.portrait) {
+      float: none;
+      display: block;
+      width: 160px;
+      margin: 0 auto var(--space-m);
+    }
+  }
+</style>

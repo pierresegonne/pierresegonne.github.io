@@ -1,0 +1,46 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { formatDate, isoDate } from '../utils/format';
+
+interface Props {
+  title: string;
+  date: Date;
+  updated?: Date;
+  description?: string;
+  canonical?: string;
+  math?: boolean;
+  mathFonts?: string[];
+}
+const { title, date, updated, description, canonical, math, mathFonts } = Astro.props;
+---
+<BaseLayout {title} {description} {canonical} {math} {mathFonts} type="article" publishedTime={date} modifiedTime={updated}>
+  <article class="post">
+    <header>
+      <h1>{title}</h1>
+      <p class="date">
+        <time datetime={isoDate(date)}>{formatDate(date)}</time>
+        {updated && <span class="updated"> · Updated <time datetime={isoDate(updated)}>{formatDate(updated)}</time></span>}
+      </p>
+      {canonical && (
+        <p class="original">Originally published on <a href={canonical}>{new URL(canonical).hostname.replace(/^www\./, '')}</a>.</p>
+      )}
+    </header>
+    <slot />
+  </article>
+</BaseLayout>
+
+<style>
+  header h1 {
+    margin-bottom: var(--space-xs);
+  }
+  .date {
+    margin: 0 0 var(--space-l);
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+  .original {
+    margin: calc(-1 * var(--space-s)) 0 var(--space-l);
+    color: var(--ink-muted);
+    font-size: var(--text-caption);
+  }
+</style>
