@@ -109,6 +109,11 @@ Fix the broken integration and the cheapest checklist items now, without waiting
 4. Move `CNAME`, favicons, `resources/*.pdf` and `resources/share/*` to `public/` **at the same paths**.
 5. Update `.gitignore` (`node_modules`, `dist`, `.astro`) and stop ignoring `package.json`.
 
+Done on `rewrite-astro` with Astro 7.4. Notes:
+- Astro 7's default Markdown processor (Satteri) has no maths support. The config uses `unified()` from `@astrojs/markdown-remark` so remark-math and rehype-katex run.
+- `astro check` doesn't support TypeScript 7 yet, so TypeScript is pinned to 6.
+- **Don't merge `rewrite-astro` into `master` before Phase 5.** Jekyll still deploys from `master`, and `CNAME`, the favicons, the CVs and the share files now live in `public/`.
+
 ### Phase 2: Migrate content
 1. Define a `posts` content collection schema: `title`, `date`, `updated?`, `description?`, `canonical?`, `draft?`, `math?` (auto-detected is fine too).
 2. Move the 13 posts to `src/content/posts/`. For each post:
