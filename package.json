@@ -13,7 +13,8 @@
     "check": "astro check",
     "astro": "astro",
     "clean": "rm -rf dist .astro node_modules/.astro",
-    "check:urls": "node scripts/check-urls.mjs dist"
+    "check:urls": "node scripts/check-urls.mjs dist",
+    "check:links": "node scripts/check-links.mjs dist"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

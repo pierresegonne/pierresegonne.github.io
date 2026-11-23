@@ -222,6 +222,23 @@ Done on `rewrite-astro`. Notes:
 4. Rewrite `README.md`: `pnpm i`, `pnpm dev`, how to write a post, how to add a hidden share file.
 5. Merge `rewrite-astro` → `master`, then check the live site with Lighthouse and test the feed in a reader.
 
+Done on `rewrite-astro`. Notes:
+- `.github/workflows/deploy.yml` runs on PRs (checks only) and on pushes to `master` (checks, then deploy):
+  1. `pnpm build` (`astro check` + build)
+  2. `pnpm check:urls` and `pnpm check:links`
+  3. Lighthouse CI, with reports uploaded as a private workflow artifact rather than public storage
+  4. `upload-pages-artifact`, then `deploy-pages`
+- The link check is `scripts/check-links.mjs`, an offline check of internal links, images and feed URLs, instead of lychee. External links aren't fetched, so flaky third-party sites can't break deploys.
+- Lighthouse budgets (`lighthouserc.json`):
+  - Errors: accessibility, best practices or SEO below 95, or any JavaScript.
+  - Warnings: performance below 90, CLS above 0.1, HTML over 30 KB.
+  - Locally, only Normalizing_flows warns (perf 89, CLS 0.127, see Phase 3).
+- Removed: `_config.yml`, `_layouts/`, `_includes/`, `_sass/`, `style.scss`, `css/`, `index.html`, `images/404.jpg`, `images/avatar.jpg`, and `LICENSE` (Jekyll Now's theme licence).
+- **Cutover order (important):**
+  1. Switch Settings → Pages → Source to **GitHub Actions**.
+  2. Merge the PR. The first push to `master` deploys the new site.
+  - Merging first would leave the legacy Jekyll builder failing on the Astro repo. The old deployment would stay live, but no new site would go out until the source is switched.
+
 ### Phase 6: Optional follow-ups
 - Repo size: the 5–10 MB source PNGs stay in git history. If size matters, compress or replace the originals (the pipeline makes optimised copies anyway), or rewrite history with `git filter-repo`. Rewriting history is destructive, so only do it deliberately.
 - Add a `/now` or `/projects` page if the design doc calls for one.

@@ -1,14 +1,10 @@
-_site
-.DS_Store
-.jekyll
-.jekyll-metadata
-.jekyll-cache
-.bundle
-.sass-cache
-Gemfile
-Gemfile.lock
-node_modules
+# Build output and caches
 dist
-.astro
-public/katex
 dist-*
+.astro
+node_modules
+
+# Generated at build time by src/integrations/katex-assets.mjs
+public/katex
+
+.DS_Store
