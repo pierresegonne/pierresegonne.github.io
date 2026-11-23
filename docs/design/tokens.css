@@ -1,0 +1,175 @@
+/* Navy & Ember — personal site redesign outline — generated from tokens.json */
+:root, [data-theme="light"] {
+  --paper: #ffffff; /* Page background behind all reading content. The content area is always plain white: colour lives only in the frame (masthead and footer bands). */
+  --ink: #333333; /* Body text on paper (12.6:1). Default text colour for paragraphs, lists, footer text. */
+  --ink-strong: #222222; /* Headings h1–h3 and post titles in the listing, on paper (15.9:1). */
+  --ink-max: #000000; /* Listing page title ("Posts") and ::selection text. Use sparingly: one element per page. */
+  --ink-muted: #666666; /* Dates, post meta, h4, blockquote text and blockquote rule, on paper (5.7:1). */
+  --hairline: #eeeeee; /* 1px separators between posts in the listing; ::selection background. Borders, never boxes or shadows. */
+  --rule: #dddddd; /* 1px bottom border of the footer band. */
+  --night: #142c66; /* Fallback colour of the masthead and footer bands, shown under/before the frame photo. Ground for all on-night text. */
+  --night-deep: #000050; /* Dominant tone sampled from the masthead photo (ultramarine, #000040–#000090 range). Use as the solid band colour if you skip the photo. */
+  --ember: #e72833; /* The ONE hot accent: the site name in the masthead, nothing else. On night 3.0:1 — passes only as large text (28px); keep it ≥24px and prefer weight 400 over 300. */
+  --ember-glow: #af3745; /* Average of the red filaments sampled from the footer photo (~8% of its pixels). Decorative only — never text. */
+  --on-night: #fffff8; /* Tagline under the site name, on night (13.2:1). */
+  --nav-on-night: #eeeeee; /* Navigation links on the masthead, on night (11.4:1). */
+  --link: #4183c4; /* REFERENCE link colour in body text and footer. FLAG: 3.99:1 on paper — fails WCAG AA for 18px body text. Replace with link-accessible. */
+  --link-hover: #4a8fe7; /* REFERENCE hover/active link colour, and nav link colour under 640px. FLAG: 3.29:1 on paper, 4.03:1 on night — fails AA. Replace with link-accessible-hover. */
+  --link-accessible: #2f6ea8; /* PROPOSED link colour on paper (5.4:1). Same hue as the reference blue, darker. */
+  --link-accessible-hover: #245f94; /* PROPOSED hover/active link colour on paper (6.7:1). Pair with an underline on hover so the change does not rely on colour alone. */
+  --code-border: #d0d7de; /* 1.25px border around highlighted code blocks (GitHub-light palette). */
+  --code-surface: #f6f8fa; /* Subtle code background (GitHub-light canvas-subtle). The reference draws code on white; use this for inline code if you add a tint. */
+  --syntax-keyword: #cf222e; /* Code keywords, on paper (5.4:1). */
+  --syntax-string: #0a3069; /* Code strings and multiline comments, on paper (12.8:1). */
+  --syntax-comment: #6e7781; /* Code comments, on paper (4.55:1 — just passes). */
+  --syntax-entity: #8250df; /* Code entities / function names, on paper. */
+  --syntax-constant: #0550ae; /* Code operators and constants, on paper. */
+  --grid-low: #6d9aae; /* Carbon-aware widget: low-intensity state (text, dot, toggle-on track). On night 4.35:1 — fine at 12–13px only because it is paired with a dot and a label. */
+  --grid-medium: #f17e93; /* Carbon-aware widget: moderate-intensity state, on night (5.2:1). */
+  --grid-high: #dc183c; /* Carbon-aware widget: high-intensity TEXT. FLAG: 2.7:1 on night — too dark for small text; use grid-high-dot for text too. */
+  --grid-high-dot: #f44336; /* Carbon-aware widget: high-intensity dot, on night (3.6:1 — OK for a non-text indicator). */
+  --grid-unknown: #cccccc; /* Carbon-aware widget: dot and toggle track before the zone is detected / when off. */
+  --shadow-button: 0 1px 1px rgba(0, 0, 0, 0.35); /* Share buttons only. The rest of the site uses no shadows. */
+}
+:root {
+  --space-xs: 5px; /* Tagline pulled up under the name (-5px). */
+  --space-s: 10px; /* Container side gutter; gap above each post in the listing; mobile nav link spacing. */
+  --space-m: 15px; /* The base rhythm: paragraph margins, heading bottom margins, gap after a post title, avatar gap. */
+  --space-l: 20px; /* Masthead and footer vertical padding; gap between nav links. */
+  --space-xl: 30px; /* List indent; article h1 top margin. */
+  --space-2xl: 50px; /* Gap between the main column and the footer band. */
+  --radius-xs: 2px; /* Share buttons — the only small controls on content. */
+  --radius-s: 5px; /* Avatar image corners. */
+  --radius-m: 8px; /* Grid-aware toggle track. */
+  --radius-round: 50%; /* Status dots, toggle knob, About-page portrait. */
+  --container-max: 740px; /* Max width of the single column, including 10px gutters on each side. */
+  --measure: 720px; /* Resulting text measure: ~80 characters of 18px IBM Plex Serif. */
+  --breakpoint-narrow: 640px; /* Single breakpoint: masthead centres, nav drops below the name, heading line-height tightens to 1.4. */
+  --main-min-height: 70vh; /* Keeps the footer band low on short pages. */
+  --masthead-image-height: 129px; /* Height of the reference masthead photo (1134×129, ≈8.8:1, background-size: cover). The band itself is content height: 20px padding + name + tagline. */
+  --font-serif: "IBM Plex Serif", Georgia, serif;
+  --font-sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --text-site-name: 300 28px/1.7 var(--font-sans); /* The site name, in ember, on the masthead band. */
+  --text-tagline: 400 16px/1.4 var(--font-sans); /* One-line role under the name, in on-night; pulled up 5px (margin-top: -5px). */
+  --text-nav-link: 300 18px/1.4 var(--font-sans); /* Masthead navigation, nav-on-night, 20px apart. 16px under 640px. */
+  --text-page-title: 700 30px/1.7 var(--font-sans); /* h1 of a page or article, ink-strong. Line-height 1.7 is loose for two-line titles; consider 1.25. */
+  --text-heading-2: 700 24px/1.7 var(--font-sans); /* h2 in articles and the post titles in the listing, ink-strong. */
+  --text-heading-3: 700 20px/1.7 var(--font-sans); /* h3, ink-strong. */
+  --text-heading-4: 700 18px/1.7 var(--font-sans); /* h4, in ink-muted (the only grey heading). */
+  --text-body: 400 18px/1.4 var(--font-serif); /* Paragraphs, lists, footer, in ink. 15px vertical rhythm between paragraphs. PROPOSED: 1.6 line-height for a serif at this size. */
+  --text-date-italic: italic 400 18px/1.4 var(--font-serif); /* Date under an article title, ink-muted, italic. */
+  --text-post-meta: 400 14px/1.4 var(--font-serif); /* Date above each post title in the listing, ink-muted. */
+  --text-blockquote: italic 400 22px/1.4 var(--font-serif); /* Pull quotes: ink-muted italic, 2px ink-muted rule on the left, 1.8em/0.8em margin. */
+  --text-read-more: 400 15px/1.4 var(--font-serif); /* Uppercase "read more" link under excerpts. */
+  --text-code: 400 12px/1.4 var(--font-mono); /* Code blocks and inline code. 12px against 18px body is small; PROPOSED 15px. */
+  --text-status-value: 400 13px/1 var(--font-sans); /* Carbon-aware widget: detected zone, on night. */
+  --text-status-label: 400 12px/1 var(--font-sans); /* Carbon-aware widget: intensity text and toggle label, on night. */
+}
+.site-name {
+  font-family: var(--font-sans);
+  font-size: 28px;
+  line-height: 1.7;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+.tagline {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+.page-title {
+  font-family: var(--font-sans);
+  font-size: 30px;
+  line-height: 1.7;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.heading-2 {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  line-height: 1.7;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.heading-3 {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 1.7;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.heading-4 {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.7;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.body {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.date-italic {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-style: italic;
+}
+.post-meta {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.blockquote {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-style: italic;
+}
+.read-more {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.status-value {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0;
+}
