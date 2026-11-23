@@ -1,0 +1,44 @@
+{
+  "manifestVersion": 3,
+  "name": "Navy & Ember — personal site redesign outline",
+  "namespace": "NavyEmber",
+  "files": [
+    "components/Footer/README.md",
+    "components/GridStatus/README.md",
+    "components/Masthead/README.md",
+    "components/PostList/README.md",
+    "components/Prose/README.md",
+    "issues-to-fix.md",
+    "renewal-outline.md",
+    "tokens.css"
+  ],
+  "libraries": [],
+  "components": [
+    {
+      "name": "Footer",
+      "group": "Frame",
+      "summary": "The bottom band: the same photo treatment as the masthead (the reference uses a brighter, redder crop), carrying a centred row of round contact icons."
+    },
+    {
+      "name": "GridStatus",
+      "group": "Signature",
+      "summary": "The reference site's signature: a small masthead widget showing the visitor's electricity-grid zone and carbon intensity, with a toggle that lets the site degr…"
+    },
+    {
+      "name": "Masthead",
+      "group": "Frame",
+      "summary": "The top band of every page: a dark photo strip with the site name in the one accent colour, a one-line tagline, and the navigation."
+    },
+    {
+      "name": "PostList",
+      "group": "Content",
+      "summary": "The home page: a reverse-chronological list of posts, each a date and a title separated by hairlines — no excerpts, no thumbnails, no cards."
+    },
+    {
+      "name": "Prose",
+      "group": "Content",
+      "summary": "Article typography: the single column people actually read, all in greys with blue only on links."
+    }
+  ],
+  "assetGroups": []
+}

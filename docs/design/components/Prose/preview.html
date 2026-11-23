@@ -1,0 +1,34 @@
+<!-- @dsCard group="Content" height=560 subtitle="Article typography" -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Prose — preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@300;400;700&family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:var(--paper); color:var(--ink); font:18px/1.4 var(--font-serif); }
+  .col { max-width:var(--container-max); margin:0 auto; padding:0 var(--space-s) var(--space-l); }
+  h1 { font:700 30px/1.7 var(--font-sans); color:var(--ink-strong); margin:var(--space-xl) 0 var(--space-m); }
+  h2 { font:700 24px/1.7 var(--font-sans); color:var(--ink-strong); margin:24px 0 var(--space-m); }
+  .date { font-style:italic; color:var(--ink-muted); margin:0 0 8px; }
+  p { margin:var(--space-m) 0; }
+  a { color:var(--link-accessible); text-decoration:none; }
+  a:hover { color:var(--link-accessible-hover); text-decoration:underline; }
+  ul { margin:var(--space-m) 0; padding-left:var(--space-xl); }
+  blockquote { margin:1.8em .8em; border-left:2px solid var(--ink-muted); padding:.1em 1em; color:var(--ink-muted); font-size:22px; font-style:italic; }
+  blockquote p { margin:0; }
+  pre { margin:var(--space-m) 0; border:1.25px solid var(--code-border); padding:7px 7px 7px 10px; overflow:auto; background:var(--paper); }
+  code { font:12px/1.4 var(--font-mono); color:var(--ink); }
+  .k { color:var(--syntax-keyword); } .s { color:var(--syntax-string); } .c { color:var(--syntax-comment); } .o { color:var(--syntax-constant); } .e { color:var(--syntax-entity); }
+  .cmp { display:flex; gap:var(--space-l); font:12px/1.4 var(--font-sans); color:var(--ink-muted); }
+  .cmp i { display:inline-block; width:10px; height:10px; vertical-align:-1px; margin-right:6px; }
+</style></head>
+<body><div class="col">
+  <h1>An article title</h1>
+  <p class="date">Aug 22, 2025</p>
+  <p>Body text is IBM Plex Serif at 18px in ink. A link sits in the flow like <a href="#">this one</a> — shown here in the proposed accessible blue; the reference uses a lighter blue that fails contrast.</p>
+  <h2>A section heading</h2>
+  <ul><li>Lists indent by 30px and use the body style.</li><li>Paragraphs, lists and headings share a 15px rhythm.</li></ul>
+  <blockquote><p>A pull quote is 22px italic, grey, with a thin rule.</p></blockquote>
+<pre><code><span class="c">// Code blocks: GitHub-light palette, white ground, thin border</span>
+<span class="k">const</span> level <span class="o">=</span> <span class="e">getCarbonLevel</span>(<span class="s">"DK-DK2"</span>);</code></pre>
+  <p class="cmp"><span><i style="background:var(--link)"></i>reference link #4183c4 · 3.99:1</span><span><i style="background:var(--link-accessible)"></i>proposed #2f6ea8 · 5.36:1</span></p>
+</div></body></html>

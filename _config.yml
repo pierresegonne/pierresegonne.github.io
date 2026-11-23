@@ -26,22 +26,16 @@ footer-links:
   linkedin: psegonne
   pinterest:
   rss: # just type anything here for a working RSS icon
-  twitter: pierre_segonne
-  stackoverflow: users/11552392/pierresegonne # your stackoverflow profile, e.g. "users/50476/bart-kiers"
+  stackoverflow:
   youtube: # channel/<your_long_string> or user/<user-name>
   googleplus: # anything in your profile username that comes after plus.google.com/
-  medium: pnpsegonne
+  medium:
 
-# Enter your Disqus shortname (not your username) to enable commenting on posts
-# You can find your shortname on the Settings page of your Disqus account
-disqus: https-pierresegonne-github-io
 
-# Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics: G-C2K1771E4P
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url: http://pierresegonne.github.io
+url: https://pierresegonne.com
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
@@ -91,3 +85,5 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+  - REFACTOR_PLAN.md
+  - docs

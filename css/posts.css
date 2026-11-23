@@ -49,13 +49,6 @@
   background-color: #556fbb;
 }
 
-.share-button.twitter {
-  background-color: #1b95e0;
-}
-.share-button.twitter:hover {
-  background-color: #269ce5;
-}
-
 .share-button.pinterest {
   background-color: #c92228;
 }
