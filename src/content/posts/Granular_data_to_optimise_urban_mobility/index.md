@@ -5,7 +5,7 @@ date: 2023-06-20
 canonical: https://www.electricitymaps.com/blog/using-granular-electricity-data-to-optimise-urban-mobility
 ---
 :::figure
-![tanya pro O2JsA nz4pQ unsplash](./tanya-pro-O2JsA_nz4pQ-unsplash.jpg)
+![An electric vehicle charging station lit by two lamps on a dark wall at night](./tanya-pro-O2JsA_nz4pQ-unsplash.jpg)
 :::
 
 _A quantification of emission savings for electric vehicles in Frederiksberg_

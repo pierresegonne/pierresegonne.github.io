@@ -135,7 +135,7 @@ Done on `rewrite-astro`. Notes:
 - The plugin sets an accurate `sizes` on every image. With `image.layout: 'constrained'`, images get a srcset, so phones no longer download 3000px originals. Animated GIFs become animated WebP.
 - Maths uses kramdown semantics (`$$` inline or block, a lone `$` is literal). Inline-fenced display blocks were split onto their own lines. KaTeX output matches the Jekyll MathJax count on every post. Attractors' two equations are now display equations, as intended.
 - Hand-fixed: the Attractors and Tutorial side-by-side blocks (now stacked image then text), the footnotes, the tables (styles dropped), the Colab badges, the meetings email template, and the carbon-aware update note (now a callout).
-- Alt text is derived from captions. Four images have no caption and got filename-based alt text: Tech_lead `pillars`/`boundaries`/`cables` and the Granular header photo. **TODO:** write proper alt text.
+- Alt text is derived from captions. The four uncaptioned photos (three in Tech_lead, the Granular header) have hand-written descriptions.
 - Unreferenced files moved along but not deployed (they could be deleted): `thats_all_folk.jpeg`, the Attractors `*.json`, `principles_header.jpeg`, `roles.excalidraw`, `emissions_all.png`, two `tanya-pro-*` variants, `Colab_queue_chang_runtime.png`.
 - About is MDX (the portrait goes through `<Image>`; the commented-out work history is kept as an MDX comment, so it is no longer shipped). Talks is Markdown, and 404 is an Astro page. Photography is gone (`/photography/` now returns a 404).
 - The share pages are plain HTML in `public/`, so their URLs are unchanged and they stay out of the sitemap.

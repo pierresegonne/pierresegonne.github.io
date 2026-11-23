@@ -12,7 +12,7 @@ canonical: https://www.electricitymaps.com/blog/beyond-the-code-the-power-of-lea
 (Potentially) unpopular opinion: Asking “How do you define the role of tech lead?” is the wrong question. I encourage instead tech leads and other engineers to reflect about what being a ~~technical~~ leader actually means; the rest will follow.
 
 :::figure
-![cables](./cables.jpg)
+![Tangled black cables and a power strip taped to a white wall with blue tape](./cables.jpg)
 :::
 
 # So, what do you do now? I am a tech lead
@@ -24,7 +24,7 @@ It made me wonder — was it the ambition of Electricity Maps' mission that capt
 Recollections of similar discussions I had at times when I was a data scientist suggest that the loose definition of the tech lead duties are at fault. I would then typically be asked about our tech stack, key characteristics of our data, models used and so forth.
 
 :::figure
-![boundaries](./boundaries.jpg)
+![Swirling red, yellow and white paint around a bright yellow centre on a black background](./boundaries.jpg)
 :::
 
 The boundaries of the tech lead duties have been difficult to define. That was true when I was promoted to that position, after having had that responsibility unofficially for 10 months; it was still true a few months ago, after 10 months of being a tech lead officially. During that time, the team I have been leading has undergone a remarkable transformation. It has evolved from a two-engineer operation into a multi-disciplinary force capable of simultaneously delivering sophisticated new features across multiple work streams. We now are able to simultaneously leverage our domain expertise to build robust quality guarantees for the data we serve, develop novel approaches to model electricity grids dynamics, as well as improve our data processing and storing methods. Such initiatives require continuous utilisation of expertise from different domains- data engineering, data analytics, mathematical modelling, product management -, covered by different members of the team. It is only now, after taking time to complete a clear role description - together with Electricity Maps’ CTO [James Dietrich](https://www.linkedin.com/in/james-dietrich-177a7892/) and other Tech Lead [Mads Nedergaard](https://www.linkedin.com/in/madsnedergaard/) -, that I finally have a personal model for what a tech lead is supposed to do.
@@ -70,7 +70,7 @@ But they will never alone define precisely what a given tech lead should priorit
 I cannot aspire to do better, but I’d nonetheless like to shed light on two concepts. Two concepts which I have never seen discussed in any definition of the tech lead role I have encountered in my journey to define my own role, and yet which have been essential to making myself more effective as a tech lead.
 
 :::figure
-![pillars](./pillars.jpg)
+![A long colonnade of stone pillars receding into shadow](./pillars.jpg)
 :::
 
 ## Understanding Leadership
