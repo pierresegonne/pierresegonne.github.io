@@ -116,12 +116,12 @@ a:active {
 }
 
 /* Links inside running text are underlined, not just coloured (WCAG 1.4.1). */
-main :is(p, li, td, figcaption, .post-meta-note) a {
+article :is(p, li, td, figcaption, .post-meta-note) a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
 }
-main :is(p, li, td, figcaption, .post-meta-note) a:hover {
+article :is(p, li, td, figcaption, .post-meta-note) a:hover {
   text-decoration-color: currentColor;
 }
 

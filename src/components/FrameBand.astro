@@ -8,16 +8,18 @@ interface Props {
   image: ImageMetadata;
   as?: 'header' | 'div';
   class?: string;
+  /** background-position at <=640px, e.g. 'left center' to keep text off the hot streaks. */
+  narrowPosition?: string;
 }
-const { image, as: Tag = 'div', class: className } = Astro.props;
+const { image, as: Tag = 'div', class: className, narrowPosition = 'center' } = Astro.props;
 const width = Math.min(image.width * 2, 2400);
 const [avif, webp] = await Promise.all([
-  getImage({ src: image, format: 'avif', width, quality: 60 }),
-  getImage({ src: image, format: 'webp', width, quality: 70 }),
+  getImage({ src: image, format: 'avif', width, quality: 45, layout: 'none' }),
+  getImage({ src: image, format: 'webp', width, quality: 70, layout: 'none' }),
 ]);
 const bg = `image-set(url("${avif.src}") type("image/avif"), url("${webp.src}") type("image/webp"))`;
 ---
-<Tag class:list={['band', className]} style={`--band-image: ${bg}`}>
+<Tag class:list={['band', className]} style={`--band-image: ${bg}; --band-pos-narrow: ${narrowPosition}`}>
   <slot />
 </Tag>
 
@@ -29,6 +31,11 @@ const bg = `image-set(url("${avif.src}") type("image/avif"), url("${webp.src}") 
     background-size: cover;
     background-position: center;
     color: var(--on-night);
+  }
+  @media (max-width: 640px) {
+    .band {
+      background-position: var(--band-pos-narrow);
+    }
   }
   .band :global(:focus-visible) {
     outline-color: var(--on-night);

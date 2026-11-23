@@ -179,6 +179,29 @@ Source: `docs/design/README.md`, `renewal-outline.md`, `components/*`, `tokens.c
 7. **Signature behaviour** (guide principle 8): the carbon-aware widget is gone. If you want a replacement, pick something static and zero-JS; otherwise none. **Your call.**
 8. **Checks**: tick every box in `docs/design/issues-to-fix.md`, then do the squint test and check widths of 375, 640, 1024 and 1440px plus 200% zoom.
 
+Done on `rewrite-astro`. Notes:
+- IBM Plex is self-hosted through Astro 7's Fonts API (Fontsource provider, Latin subset, metric-matched fallbacks). That's 8 files, 176 KB in total, with Serif 400 and Sans 700 preloaded.
+- Site CSS is inlined in every page (`build.inlineStylesheets: 'always'`), and pages ship no JavaScript.
+- KaTeX CSS and fonts are copied to `public/katex/` (git-ignored) by `src/integrations/katex-assets.mjs`. They load only on the 6 posts with maths, which also preload exactly the KaTeX fonts each post uses (`src/utils/katex-fonts.ts`).
+- Shiki uses `github-light-default`, whose colours match the design tokens and all pass AA. The old `github-light` orange (3.5:1) failed.
+- Links in running text are underlined, at reduced opacity until hover. Lighthouse flagged colour-only links (WCAG 1.4.1).
+- Content fixes: heading levels (Load_shifting, Tech_lead had an in-body `#`, Principles), four "here" links reworded, three links moved to https, and the moved Kosiorek article link updated. The sjvgeology link stays http (no https available).
+- Lighthouse (mobile, simulated slow 4G):
+  - 100/100/100/100 on home, Talks and About.
+  - 97–99 performance on content posts.
+  - Normalizing_flows is the exception at 88–93: in 2 of 3 runs a CLS of 0.127 appears when KaTeX fonts land after first paint. Accepted.
+  - Load_shifting's EV photo is only 275px wide at the source (best practices 96).
+- Checklist (`docs/design/issues-to-fix.md`):
+  - Done: A1–A7, C1–C3, C5, T1, T3–T5, L2, L3, P1–P6, S1–S3.
+  - No longer applicable: C4, L1 and T2 (the carbon widget and share bar are gone).
+- **Frame image A/B** (`PUBLIC_FRAME=a|b`, default `a`, `src/frame.ts`):
+  - A: the ESA crops re-cut from the 2000px preview at 1.75× the old resolution, with the credit shown in the footer.
+  - B: a generated look-alike (`scripts/generate-frame.py`, seeded) that needs no credit.
+  - Both serve AVIF bands of 12–24 KB.
+  - On ≤640px the masthead photo is anchored left, so no streak sits behind the centred name (C5).
+  - Comparison: `docs/design/frame-ab-comparison.png`.
+  - **Pending: Pierre's choice.** Then delete the other variant, plus `src/frame.ts` if B wins (and the credit).
+
 ### Phase 4: Feeds, SEO and URL continuity
 1. RSS/Atom at **`/feed.xml`** (the same path as jekyll-feed, so existing subscribers keep working), with full content.
 2. `sitemap-index.xml` + a `robots.txt` pointing to it. Exclude the hidden share pages and the 404 page.
@@ -215,4 +238,4 @@ Source: `docs/design/README.md`, `renewal-outline.md`, `components/*`, `tokens.c
 | Signature behaviour replacing the carbon widget | **Decided** | None |
 
 ## 5. Inputs still needed
-- Approval to download the ESA source TIFF (88.8 MB) when Phase 3 reaches the frame image.
+- Frame image: A (ESA crops) or B (generated). If A, optionally approve downloading the 88.8 MB source TIFF for sharper crops; the current crops come from the 2000px preview.

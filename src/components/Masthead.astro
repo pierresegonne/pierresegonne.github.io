@@ -1,13 +1,13 @@
 ---
 import FrameBand from './FrameBand.astro';
-import header from '../assets/frame/header.jpg';
+import { FRAME } from '../frame';
 import { SITE } from '../site';
 
 const path = Astro.url.pathname;
 const isCurrent = (href: string) =>
   href === '/' ? path === '/' || !SITE.nav.some((n) => n.href !== '/' && path.startsWith(n.href)) && !path.startsWith('/404') : path.startsWith(href);
 ---
-<FrameBand image={header} as="header" class="masthead">
+<FrameBand image={FRAME.header} as="header" class="masthead" narrowPosition="left center">
   <div class="container inner">
     <div class="identity">
       <a class="site-name" href="/">{SITE.name}</a>

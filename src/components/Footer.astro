@@ -1,6 +1,6 @@
 ---
 import FrameBand from './FrameBand.astro';
-import footer from '../assets/frame/footer.jpg';
+import { FRAME, FRAME_VARIANT } from '../frame';
 import { SITE } from '../site';
 
 // Icons: GitHub from Simple Icons (CC0), mail/RSS from Lucide (ISC), LinkedIn "in" glyph.
@@ -10,7 +10,7 @@ const links = [
   { label: 'LinkedIn', href: `https://www.linkedin.com/in/${SITE.links.linkedin}`, icon: 'linkedin' },
 ];
 ---
-<FrameBand image={footer} as="div" class="footer-band">
+<FrameBand image={FRAME.footer} as="div" class="footer-band">
   <footer class="container">
     <ul class="links">
       {links.map(({ label, href, icon }) => (
@@ -29,9 +29,11 @@ const links = [
         </li>
       ))}
     </ul>
-    <p class="credit">
-      Header and footer images: <a href="https://www.esa.int/media/holbox-island-mexico">Holbox Island, Mexico</a>, contains modified Copernicus Sentinel data (2019), processed by ESA, <a href="https://creativecommons.org/licenses/by-sa/3.0/igo/">CC BY-SA 3.0 IGO</a>
-    </p>
+    {FRAME_VARIANT === 'a' && (
+      <p class="credit">
+        Header and footer images: <a href="https://www.esa.int/media/holbox-island-mexico">Holbox Island, Mexico</a>, contains modified Copernicus Sentinel data (2019), processed by ESA, <a href="https://creativecommons.org/licenses/by-sa/3.0/igo/">CC BY-SA 3.0 IGO</a>
+      </p>
+    )}
   </footer>
 </FrameBand>
 
