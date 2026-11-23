@@ -1,19 +1,20 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { formatDate, isoDate } from '../utils/format';
+import { isoDate } from '../utils/format';
 
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
+const monthYear = (d: Date) => d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
 ---
 <BaseLayout>
   <h1>Posts</h1>
   <ol class="post-list" reversed>
     {posts.map((post) => (
       <li>
-        <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date, 'short')}</time>
-        <h2><a href={`/${post.id}/`}>{post.data.title}</a></h2>
+        <a href={`/${post.id}/`}>{post.data.title}</a>
+        <time datetime={isoDate(post.data.date)}>{monthYear(post.data.date)}</time>
       </li>
     ))}
   </ol>
@@ -24,30 +25,45 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
     color: var(--ink-max);
     margin-top: 0.75em;
   }
+  /* An index: one quiet line per post, title in the reading face, date to the right. */
   .post-list {
     margin: 0;
     padding: 0;
     list-style: none;
   }
   li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-l);
     margin: 0;
-    padding-top: var(--space-s);
+    padding: 0.7rem 0;
     border-bottom: 1px solid var(--hairline);
   }
   li:last-child {
     border-bottom: none;
   }
-  time {
-    font-size: var(--text-small);
-    color: var(--ink-muted);
-  }
-  h2 {
-    margin: 0 0 var(--space-m);
-  }
-  h2 a {
+  a {
     color: var(--ink-strong);
+    font: 400 var(--text-body) / 1.4 var(--serif);
+    text-decoration: none;
   }
-  h2 a:hover {
+  a:hover {
     color: var(--link-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+  time {
+    flex: none;
+    font: 400 0.8125rem / 1 var(--sans);
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  @media (max-width: 640px) {
+    li {
+      flex-direction: column;
+      gap: 0.2rem;
+    }
   }
 </style>
