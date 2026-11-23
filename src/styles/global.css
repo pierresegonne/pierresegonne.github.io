@@ -1,0 +1,301 @@
+/* Navy & Ember: global styles. Content is paper + ink only; colour lives in the frame bands.
+   Element selectors on purpose: Markdown output needs no classes (Prose component spec). */
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 var(--text-body) / var(--leading-body) var(--serif);
+  text-rendering: optimizeLegibility;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-s);
+}
+
+main {
+  display: block;
+  min-height: var(--main-min-height);
+}
+
+::selection {
+  color: var(--ink-max);
+  background: var(--hairline);
+}
+
+/* Skip link: hidden until focused (A6) */
+.skip-link {
+  position: absolute;
+  left: var(--space-s);
+  top: -100px;
+  z-index: 10;
+  padding: var(--space-s) var(--space-m);
+  background: var(--paper);
+  color: var(--link);
+  font: 400 1rem/1 var(--sans);
+}
+.skip-link:focus {
+  top: var(--space-s);
+}
+
+/* Focus (A4): always visible, never removed */
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+
+/* Motion (A7) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Headings ---------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--sans);
+  font-weight: 700;
+  line-height: var(--leading-heading);
+  color: var(--ink-strong);
+  margin: 1.4em 0 var(--space-m);
+}
+h1 {
+  font-size: var(--text-h1);
+  margin-top: var(--space-xl);
+}
+h2 {
+  font-size: var(--text-h2);
+}
+h3 {
+  font-size: var(--text-h3);
+}
+h4,
+h5,
+h6 {
+  font-size: var(--text-h4);
+  color: var(--ink-muted);
+}
+
+/* ---------- Prose ---------- */
+p {
+  margin: var(--space-m) 0;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  text-underline-offset: 0.15em;
+}
+a:hover,
+a:active {
+  color: var(--link-hover);
+  text-decoration: underline; /* C2: not colour alone */
+}
+
+/* Links inside running text are underlined, not just coloured (WCAG 1.4.1). */
+main :is(p, li, td, figcaption, .post-meta-note) a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+}
+main :is(p, li, td, figcaption, .post-meta-note) a:hover {
+  text-decoration-color: currentColor;
+}
+
+ul,
+ol {
+  margin: var(--space-m) 0;
+  padding-left: var(--space-xl);
+}
+li + li {
+  margin-top: 0.25em;
+}
+li > ul,
+li > ol {
+  margin: 0.25em 0;
+}
+
+strong,
+b {
+  font-weight: 700;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--hairline);
+  margin: var(--space-xl) 0;
+}
+
+blockquote {
+  margin: 1.8em 0.8em;
+  padding: 0.1em 1em;
+  border-left: 2px solid var(--ink-muted);
+  color: var(--ink-muted);
+  font-size: var(--text-quote);
+  font-style: italic;
+  line-height: 1.45;
+}
+blockquote p {
+  margin: 0.4em 0;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+img {
+  height: auto;
+}
+
+/* ---------- Code (GitHub light via Shiki) ---------- */
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--mono);
+  font-size: var(--text-code);
+}
+:not(pre) > code {
+  padding: 0.1em 0.3em;
+  background: var(--code-surface);
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+pre {
+  margin: var(--space-m) 0;
+  padding: var(--space-s) var(--space-m);
+  border: 1.25px solid var(--code-border);
+  background: var(--paper) !important; /* white ground, overriding Shiki's theme background */
+  line-height: 1.5;
+  overflow-x: auto; /* L3 */
+  tab-size: 2;
+}
+
+/* ---------- Tables ---------- */
+table {
+  border-collapse: collapse;
+  margin: var(--space-m) auto;
+  font: 400 var(--text-caption) / 1.4 var(--sans);
+  display: block;
+  max-width: max-content;
+  overflow-x: auto;
+}
+th,
+td {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+}
+th {
+  font-weight: 700;
+  color: var(--ink-strong);
+  border-bottom-color: var(--ink-muted);
+}
+
+/* ---------- Maths ---------- */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 0;
+}
+
+/* ---------- Figures (:::figure) ---------- */
+.figure {
+  width: min(var(--figure-width, 100%), 100%);
+  margin: var(--space-xl) auto;
+}
+/* Equal columns, sized before images load (no layout shift). */
+.figure-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--space-s);
+  align-items: start;
+}
+.figure-row + .figure-row {
+  margin-top: var(--space-s);
+}
+.figure-row img {
+  display: block;
+  justify-self: center;
+  max-width: 100%; /* never upscale past the image's own width */
+}
+.figure > table {
+  margin-top: 0;
+}
+figcaption {
+  margin-top: var(--space-s);
+  color: var(--ink-muted);
+  font-size: var(--text-caption);
+  font-style: italic;
+  line-height: 1.45;
+  text-align: center;
+}
+figcaption p {
+  margin: 0.25em 0;
+}
+
+/* Small muted notes (:::meta): footnotes, "last updated" lines, photo credits */
+.post-meta-note {
+  color: var(--ink-muted);
+  font-size: var(--text-caption);
+  font-style: italic;
+  line-height: 1.45;
+}
+.post-meta-note p {
+  margin: 0.4em 0;
+}
+
+/* Boxed aside (:::callout): a rule, not a card */
+.callout {
+  margin: var(--space-l) 0;
+  padding: var(--space-xs) var(--space-l);
+  border-left: 2px solid var(--ink-muted);
+  background: var(--code-surface);
+}
+.callout p,
+.callout ul {
+  margin: var(--space-s) 0;
+}
+
+/* Embedded slides */
+.embed iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--rule);
+}
+
+/* ---------- Single breakpoint ---------- */
+@media (max-width: 640px) {
+  .figure {
+    width: 100%;
+  }
+  blockquote {
+    margin-inline: 0;
+  }
+}

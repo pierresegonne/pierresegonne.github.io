@@ -1,15 +1,30 @@
 ---
-// Minimal shell for the content migration. Design (Navy & Ember) lands in Phase 3.
-import '../styles/migration.css';
+import { Font } from 'astro:assets';
+import Masthead from '../components/Masthead.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../site';
+import '../styles/tokens.css';
+import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
+  /** Canonical URL override, e.g. for posts first published elsewhere. */
   canonical?: string;
+  type?: 'website' | 'article';
+  /** Load the KaTeX stylesheet (posts with maths only). */
+  math?: boolean;
+  /** Extra KaTeX font files to preload (see utils/katex-fonts). */
+  mathFonts?: string[];
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  /** Keep the page out of search results (404). */
+  noindex?: boolean;
 }
-const { title, description = 'Lead Engineer', canonical } = Astro.props;
-const fullTitle = title ? `${title} – Pierre Segonne` : 'Pierre Segonne – Lead Engineer';
+const { title, description = SITE.description, canonical, type = 'website', math = false, mathFonts = [], publishedTime, modifiedTime, noindex = false } = Astro.props;
+const fullTitle = title ? `${title} – ${SITE.name}` : `${SITE.name} – ${SITE.tagline}`;
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 ---
 <!doctype html>
 <html lang="en">
@@ -18,17 +33,43 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
+    <meta name="author" content={SITE.name} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonicalUrl} />}
+    <meta name="theme-color" content="#142c66" />
+
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title ?? SITE.name} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
+
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/feed.xml" />
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="/images/favicon/site.webmanifest" />
+
+    <Font cssVariable="--font-serif" preload={[{ weight: '400', style: 'normal' }]} />
+    <Font cssVariable="--font-sans" preload={[{ weight: '700', style: 'normal' }]} />
+    <Font cssVariable="--font-mono" />
+    {math && (
+      <>
+        <link rel="stylesheet" href="/katex/katex.min.css" />
+        {/* The two faces inline maths needs first: avoids text reflowing when they arrive. */}
+        <link rel="preload" href="/katex/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="/katex/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin />
+        {mathFonts.map((f) => <link rel="preload" href={`/katex/fonts/${f}.woff2`} as="font" type="font/woff2" crossorigin />)}
+      </>
+    )}
   </head>
   <body>
-    <header>
-      <a href="/">Pierre Segonne</a>
-      <nav><a href="/">Posts</a> <a href="/talks/">Talks</a> <a href="/about/">About</a></nav>
-    </header>
-    <main id="content">
+    <a class="skip-link" href="#content">Skip to content</a>
+    <Masthead />
+    <main id="content" class="container" tabindex="-1">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>

@@ -29,11 +29,11 @@ This variability opens up the possibility to be leveraged for optimising any car
 
 To do this, I'll use a back of the envelope optimisation procedure in a simplified scenario.
 
-### Use case
+## Use case
 
 Let's stay in Eastern Denmark, and look at the example of Mette. Let's say that she is an eco-conscious engineer that works for Novo Nordisk. Every day, she has to commute from her cozy apartment in central Copenhagen to Målov, where the company has production facilities. She drives a Tesla model 3 back and forth, for a total of around 70 km per day. She usually makes sure that her car is plugged in after she's done putting her kids to bed, and walking her dog. Overall, that means that the car is plugged in between 00:00 an 07:00 every day.
 
-### The modelling
+## The modelling
 
 We will rely on the following assumptions, which should correspond to standard values for a Tesla model 3 [2]:
 
@@ -123,7 +123,7 @@ $$
 
 This linear optimisation problem can directly be solved by simple solvers.
 
-### Results
+## Results
 
 Overall, and reassuringly, we can see below that the daily emissions are lower for the smart charging scenario.
 
@@ -173,7 +173,7 @@ Finally, orders of magnitude are important to keep in mind when considering how 
 
 Thanks for reading!
 
-You can find the code I wrote for this calculation [here](https://drive.google.com/file/d/1K_SJL0JPzo8AGAxZ6-Uh_IJJa55zUyKj/view?usp=sharing).
+You can find [the code I wrote for this calculation](https://drive.google.com/file/d/1K_SJL0JPzo8AGAxZ6-Uh_IJJa55zUyKj/view?usp=sharing).
 
 
 ## References

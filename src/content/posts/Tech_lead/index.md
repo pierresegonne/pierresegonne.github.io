@@ -15,7 +15,7 @@ canonical: https://www.electricitymaps.com/blog/beyond-the-code-the-power-of-lea
 ![Tangled black cables and a power strip taped to a white wall with blue tape](./cables.jpg)
 :::
 
-# So, what do you do now? I am a tech lead
+## So, what do you do now? I am a tech lead
 
 Every few other months I travel back to Paris, the city that played host to my student days and the friendships I forged there. During my last visit, I crossed paths with a group of former classmates, eager to catch up on the years that had passed. Over a few rounds of drinks, multiple times over the inevitable question arose: "So, what do you do now?”. Every time I stated that I was a tech lead at Electricity Maps, I was met with the same reaction. I would **only** be questioned about the company as a whole and never about what being a tech lead is about.
 
@@ -32,7 +32,7 @@ The boundaries of the tech lead duties have been difficult to define. That was t
 Over this time, the boundaries of my role have evolved constantly, between areas commonly associated with senior engineering, product management, research project management, and engineering management.
 Through this journey, I've gained valuable insights and identified latent traits that are crucial for tech leads, which I’ve found to often be overlooked in conventional definitions of the role.
 
-# The Beginning
+## The Beginning
 
 *In the beginning the engineers created the semi-conductors and the transistors. Now the motherboard was formless and empty, darkness was over the surface of the deep, and the Spirit of the engineers was hovering over the useless blobs of silicon.
 And the engineers said “Let there be software”  and there was software. Together with software arose unbridled complexity. The engineers saw that complexity was perilous and said “let there be a tech lead to deal with it”. So the engineers created the tech lead.*
@@ -73,7 +73,7 @@ I cannot aspire to do better, but I’d nonetheless like to shed light on two co
 ![A long colonnade of stone pillars receding into shadow](./pillars.jpg)
 :::
 
-## Understanding Leadership
+### Understanding Leadership
 
 I'm fairly certain that most tech leads are promoted to their position without having a comprehensive grasp of what leadership truly entails. Quite ironic for a position with "lead" in the title, isn't it?
 Extrapolating from [Randall Stutman remarks on The Knowledge Project](https://www.youtube.com/watch?v=b_norXr5dR0), **Leadership is the manifestation of messages and symbolism that translates into actions and routines that elevate everyone's performance**.
@@ -92,7 +92,7 @@ A manager should for example nurture feedback to encourage a bottoms-up flow of 
 
 Ultimately, it’s crucial for both tech leads and managers within the same organisation to clearly define the scope of their respective leadership and thus avoid a detrimental overlap.
 
-## Emotional fluency
+### Emotional fluency
 
 Technical fluency underpins technical leadership. While an effective tech lead might not be the fastest nor most experienced software engineer in the team, they must have a clear understanding of the technical context in which they operate. Without this understanding, impossible to quickly understand trade-offs and objectively balance different solutions to the problem to solve.
 
@@ -103,7 +103,7 @@ Furthermore, it has been important to also be consistent in the way I share my o
 Lastly, setting such a common foundation is a shared responsibility. That means that if one expects others in the team to open up about how a problem the team is facing makes them feel, others will expect the same in return.
 
 
-# Conclusion
+## Conclusion
 
 Having written down these thoughts has helped me refine and structure my own understanding of what being a tech lead encompasses. I’ll be content even if that’s the only thing this post achieves. While the meticulous definition of the tech lead responsibilities might be helpful in making tech leads effective, I’ve come to realise that the definition of latent traits underpinning effective technical leadership is even more helpful. This, in my opinion, is worth sharing.
 **Ultimately, I’ll be even more satisfied if readers of the post only absorb that a ~~technical~~ leader can only be as successful as everyone else around them**.

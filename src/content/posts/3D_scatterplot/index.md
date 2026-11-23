@@ -75,7 +75,7 @@ Here again it is pretty simple, for a given iteration, the value shown by the sc
 
 Please note the use of `data[iteration][i,0:1]` and not `data[iteration][i,0]`. This is because the scatter function of Matplotlib expects an object with a len, and therefore not a number.
 
-Please also note the use of `_offsets3d`. It is a private and is a workaround found [here](https://stackoverflow.com/questions/41602588/matplotlib-3d-scatter-animations).
+Please also note the use of `_offsets3d`. It is a private and is a workaround found [on Stack Overflow](https://stackoverflow.com/questions/41602588/matplotlib-3d-scatter-animations).
 
 ## Main Function
 

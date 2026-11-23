@@ -1,0 +1,36 @@
+---
+// The photo band behind the masthead and footer: optimised AVIF/WebP via image-set(),
+// over a flat `night` colour that shows while (or if) the image loads.
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  image: ImageMetadata;
+  as?: 'header' | 'div';
+  class?: string;
+}
+const { image, as: Tag = 'div', class: className } = Astro.props;
+const width = Math.min(image.width * 2, 2400);
+const [avif, webp] = await Promise.all([
+  getImage({ src: image, format: 'avif', width, quality: 60 }),
+  getImage({ src: image, format: 'webp', width, quality: 70 }),
+]);
+const bg = `image-set(url("${avif.src}") type("image/avif"), url("${webp.src}") type("image/webp"))`;
+---
+<Tag class:list={['band', className]} style={`--band-image: ${bg}`}>
+  <slot />
+</Tag>
+
+<style>
+  .band {
+    position: relative;
+    background-color: var(--night);
+    background-image: var(--band-image);
+    background-size: cover;
+    background-position: center;
+    color: var(--on-night);
+  }
+  .band :global(:focus-visible) {
+    outline-color: var(--on-night);
+  }
+</style>

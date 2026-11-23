@@ -1,0 +1,61 @@
+/* Navy & Ember design tokens (docs/design/tokens.css), adjusted per REFACTOR_PLAN Phase 3:
+   accessible link blues only (C1, C2), PROPOSED type values (T3-T5, C5), rem type scale,
+   no carbon-widget / share-button tokens. Light mode only. */
+:root {
+  color-scheme: light;
+
+  /* Colour: content */
+  --paper: #ffffff;
+  --ink: #333333;          /* body text, 12.6:1 */
+  --ink-strong: #222222;   /* headings, post titles */
+  --ink-max: #000000;      /* listing page title, ::selection text */
+  --ink-muted: #666666;    /* dates, h4, quotes, captions, 5.7:1 */
+  --hairline: #eeeeee;
+  --rule: #dddddd;
+  --link: #2f6ea8;         /* 5.4:1 */
+  --link-hover: #245f94;   /* 6.7:1, always with underline */
+
+  /* Colour: frame (masthead + footer bands only) */
+  --night: #142c66;
+  --night-deep: #000050;
+  --ember: #e72833;        /* the site name, nothing else */
+  --on-night: #fffff8;     /* 13.2:1 on night */
+  --nav-on-night: #eeeeee; /* 11.4:1 on night */
+
+  /* Colour: code (GitHub light) */
+  --code-border: #d0d7de;
+  --code-surface: #f6f8fa;
+
+  /* Spacing: a 15px rhythm */
+  --space-xs: 5px;
+  --space-s: 10px;
+  --space-m: 15px;
+  --space-l: 20px;
+  --space-xl: 30px;
+  --space-2xl: 50px;
+
+  /* Layout */
+  --container-max: 740px;  /* 720px measure + 10px gutters */
+  --main-min-height: 70vh;
+  --radius-round: 50%;
+
+  /* Type families (the --font-* variables are defined by Astro's Fonts API,
+     with metric-matched fallbacks; these aliases keep a readable name) */
+  --serif: var(--font-serif), Georgia, serif;
+  --sans: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
+  --mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Type scale (root 16px) */
+  --text-body: 1.125rem;      /* 18px */
+  --text-small: 0.875rem;     /* 14px */
+  --text-caption: 0.9375rem;  /* 15px */
+  --text-h1: 1.875rem;        /* 30px */
+  --text-h2: 1.5rem;          /* 24px */
+  --text-h3: 1.25rem;         /* 20px */
+  --text-h4: 1.125rem;        /* 18px */
+  --text-quote: 1.375rem;     /* 22px */
+  --text-code: 0.9375rem;     /* 15px (T3) */
+  --text-site-name: 1.75rem;  /* 28px */
+  --leading-body: 1.6;        /* T4 */
+  --leading-heading: 1.25;    /* T5 */
+}

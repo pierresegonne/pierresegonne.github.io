@@ -89,7 +89,7 @@ One might counter-argue that determinism might still aplly on the ideal, continu
 
 This insight forced me to revisit my understanding of probabilities. Instead of being a theory for overcoming our inability to capture the complete state of the universe, **I now rather see it as a theory that captures the macroscopic structures that emerge from the continuous variations of the possibles**. Don't ask me why, but I find this new paradigm reassuring and empowering.
 
-If you came here purely for the nice visuals, I also recommend visiting [Paul Bourke](http://paulbourke.net/fractals/clifford/), [Vedran Sekara](https://vedransekara.github.io/2016/11/14/strange_attractors.html), [PyViz](https://examples.pyviz.org/attractors/attractors.html), and [Ben](https://blbadger.github.io/clifford-attractor.html)'s posts.
+If you came here purely for the nice visuals, I also recommend visiting [Paul Bourke](https://paulbourke.net/fractals/clifford/), [Vedran Sekara](https://vedransekara.github.io/2016/11/14/strange_attractors.html), [PyViz](https://examples.pyviz.org/attractors/attractors.html), and [Ben](https://blbadger.github.io/clifford-attractor.html)'s posts.
 
 I gathered all the code in a [GitHub repository](https://github.com/pierresegonne/funky-attractors), feel free to have a look.
 

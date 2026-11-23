@@ -648,6 +648,6 @@ It may seems like a lot of coding for such a small form, and it is, nevertheless
 
 Thanks a lot for reading this article, I would be immensely thankful for any feedback 👍.
 
-You can find the final code [here](https://github.com/pierresegonne/tuto_form_react-redux). Feel free to download the code, to add a visual layer such as [material-ui](https://mui.com/), to link the form to a backend and do whatever you can imagine with it!
+You can find [the final code on GitHub](https://github.com/pierresegonne/tuto_form_react-redux). Feel free to download the code, to add a visual layer such as [material-ui](https://mui.com/), to link the form to a backend and do whatever you can imagine with it!
 
 I want to Thank [rawpixel](https://unsplash.com/photos/8wClLnwbNkc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) for the cover photo.

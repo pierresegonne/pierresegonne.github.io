@@ -13,3 +13,24 @@ const { frontmatter } = Astro.props;
     <slot />
   </article>
 </BaseLayout>
+
+<style>
+  .page :global(.portrait) {
+    float: right;
+    width: 200px;
+    margin: 0 0 var(--space-m) var(--space-l);
+    border-radius: var(--radius-round);
+    filter: grayscale(1);
+  }
+  .page :global(h2) {
+    clear: both;
+  }
+  @media (max-width: 640px) {
+    .page :global(.portrait) {
+      float: none;
+      display: block;
+      width: 160px;
+      margin: 0 auto var(--space-m);
+    }
+  }
+</style>

@@ -35,7 +35,7 @@ Recently, we opened a [position](https://electricitymaps.com/jobs/index.html) to
 
 Hence this blog post, which aims at capturing my current thoughts around the data scientist role and practices that should be more widely adopted within the profession. This opinion piece is a reflection of the prism through which I perceive my work. It is therefore highly influenced by my work for Electricity Maps, my previous interrogations between research and industry, and my relative freshness within this position. For that reason, it might get updated occasionally.
 
-#### Table of content:
+## Table of contents
 
 - [The data scientist role](#the-data-scientist-role)
 - [Practices](#practices)

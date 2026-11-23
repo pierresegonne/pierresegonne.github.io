@@ -11,7 +11,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "astro": "astro",
+    "clean": "rm -rf dist .astro node_modules/.astro"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

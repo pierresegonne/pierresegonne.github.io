@@ -33,8 +33,21 @@ const isImageParagraph = (node) =>
   node.children.some((c) => c.type === 'image') &&
   node.children.every((c) => c.type === 'image' || (c.type === 'text' && !c.value.trim()) || c.type === 'break');
 
+/** An image within the first few blocks is likely above the fold: load it eagerly (LCP). */
+const EAGER_WITHIN_BLOCKS = 3;
+
 export default function remarkFigures() {
   return (tree) => {
+    const early = tree.children.slice(0, EAGER_WITHIN_BLOCKS);
+    let firstImage;
+    visit({ type: 'root', children: early }, 'image', (img) => {
+      firstImage ??= img;
+    });
+    if (firstImage && !/^https?:/.test(firstImage.url)) {
+      firstImage.data ??= {};
+      firstImage.data.hProperties = { ...(firstImage.data.hProperties ?? {}), loading: 'eager', fetchpriority: 'high' };
+    }
+
     visit(tree, (node, index, parent) => {
       if (node.type === 'textDirective' || node.type === 'leafDirective') {
         // Restore the original text, e.g. "foo:bar" in prose.

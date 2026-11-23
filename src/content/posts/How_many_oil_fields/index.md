@@ -148,7 +148,7 @@ python train.py --data NEPU.yaml --epochs 300 --weights '' --cfg yolov5n.yaml  -
 
 ### ClearML _(recommended solution)_
 
-_All documentation to run YOLOv5 trainings with ClearML can be found [here](https://clear.ml/docs/latest/docs/integrations/yolov5/)_
+_All documentation to run YOLOv5 trainings with ClearML can be found in the [ClearML YOLOv5 integration docs](https://clear.ml/docs/latest/docs/integrations/yolov5/)_
 
 ClearML provides a way to run YOLOv5 trainings on a remote server, which is a more scalable and practical solution than local training. It specifically allows to boot a worker using Google Colab resources, including GPUs and TPUs, that can execute the training script of YOLOv5 in a seemless way. All training artefacts and metrics are surfaced and provide a simple way to verify that the training is working as expected.
 

@@ -1,0 +1,99 @@
+---
+import FrameBand from './FrameBand.astro';
+import footer from '../assets/frame/footer.jpg';
+import { SITE } from '../site';
+
+// Icons: GitHub from Simple Icons (CC0), mail/RSS from Lucide (ISC), LinkedIn "in" glyph.
+const links = [
+  { label: 'Email', href: `mailto:${SITE.links.email}`, icon: 'mail' },
+  { label: 'GitHub', href: `https://github.com/${SITE.links.github}`, icon: 'github' },
+  { label: 'LinkedIn', href: `https://www.linkedin.com/in/${SITE.links.linkedin}`, icon: 'linkedin' },
+];
+---
+<FrameBand image={footer} as="div" class="footer-band">
+  <footer class="container">
+    <ul class="links">
+      {links.map(({ label, href, icon }) => (
+        <li>
+          <a href={href} aria-label={label}>
+            {icon === 'mail' && (
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="stroke"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" /><rect x="2" y="4" width="20" height="16" rx="2" /></svg>
+            )}
+            {icon === 'github' && (
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="fill"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg>
+            )}
+            {icon === 'linkedin' && (
+              <svg viewBox="15 13.5 32 31" aria-hidden="true" class="fill"><path d="M22.47 23.71h-6.69v20.43h6.69z" /><path d="M22.91 17.39c-.04-2-1.45-3.53-3.74-3.53s-3.78 1.53-3.78 3.53c0 1.96 1.45 3.53 3.7 3.53h.04c2.33 0 3.78-1.57 3.78-3.53z" /><path d="M46.58 32.42c0-6.27-3.3-9.19-7.7-9.19-3.55 0-5.14 1.98-6.03 3.37v-2.89h-6.69c.09 1.92 0 20.43 0 20.43h6.69V32.73c0-.61.04-1.22.22-1.66.48-1.22 1.58-2.48 3.43-2.48 2.42 0 3.39 1.87 3.39 4.62v10.93h6.69z" /></svg>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="credit">
+      Header and footer images: <a href="https://www.esa.int/media/holbox-island-mexico">Holbox Island, Mexico</a>, contains modified Copernicus Sentinel data (2019), processed by ESA, <a href="https://creativecommons.org/licenses/by-sa/3.0/igo/">CC BY-SA 3.0 IGO</a>
+    </p>
+  </footer>
+</FrameBand>
+
+<style>
+  .footer-band {
+    margin-top: var(--space-2xl);
+    border-bottom: 1px solid var(--rule);
+  }
+  footer {
+    padding-block: var(--space-l);
+    text-align: center;
+  }
+  .links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-s);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .links li + li {
+    margin: 0;
+  }
+  .links a {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-round);
+    background: var(--on-night);
+    color: var(--night);
+  }
+  .links a:hover {
+    background: var(--paper);
+    text-decoration: none;
+  }
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+  .fill {
+    fill: currentColor;
+  }
+  .stroke {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .credit {
+    display: inline-block;
+    max-width: 100%;
+    margin: var(--space-m) 0 0;
+    padding: 2px 8px;
+    background: rgb(0 0 40 / 0.6);
+    font: 400 0.75rem / 1.4 var(--sans);
+    color: var(--on-night);
+    text-wrap: balance;
+  }
+  .credit a {
+    color: inherit;
+    text-decoration: underline;
+  }
+</style>
