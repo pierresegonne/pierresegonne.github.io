@@ -1,6 +1,6 @@
 ---
 import FrameBand from './FrameBand.astro';
-import { FRAME, FRAME_VARIANT } from '../frame';
+import footer from '../assets/frame/footer.png';
 import { SITE } from '../site';
 
 // Icons: GitHub from Simple Icons (CC0), mail/RSS from Lucide (ISC), LinkedIn "in" glyph.
@@ -10,7 +10,7 @@ const links = [
   { label: 'LinkedIn', href: `https://www.linkedin.com/in/${SITE.links.linkedin}`, icon: 'linkedin' },
 ];
 ---
-<FrameBand image={FRAME.footer} as="div" class="footer-band">
+<FrameBand image={footer} as="div" class="footer-band">
   <footer class="container">
     <ul class="links">
       {links.map(({ label, href, icon }) => (
@@ -29,11 +29,6 @@ const links = [
         </li>
       ))}
     </ul>
-    {FRAME_VARIANT === 'a' && (
-      <p class="credit">
-        Header and footer images: <a href="https://www.esa.int/media/holbox-island-mexico">Holbox Island, Mexico</a>, contains modified Copernicus Sentinel data (2019), processed by ESA, <a href="https://creativecommons.org/licenses/by-sa/3.0/igo/">CC BY-SA 3.0 IGO</a>
-      </p>
-    )}
   </footer>
 </FrameBand>
 
@@ -83,19 +78,5 @@ const links = [
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
-  }
-  .credit {
-    display: inline-block;
-    max-width: 100%;
-    margin: var(--space-m) 0 0;
-    padding: 2px 8px;
-    background: rgb(0 0 40 / 0.6);
-    font: 400 0.75rem / 1.4 var(--sans);
-    color: var(--on-night);
-    text-wrap: balance;
-  }
-  .credit a {
-    color: inherit;
-    text-decoration: underline;
   }
 </style>

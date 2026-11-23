@@ -1,7 +1,7 @@
-"""Generate the Navy & Ember frame images (variant B): a dark ultramarine field crossed by
+"""Generate the Navy & Ember frame images: a dark ultramarine field crossed by
 thin red-hot filaments, in the spirit of the Sentinel-2 Holbox image but entirely synthetic.
 
-    python3 scripts/generate-frame.py            # writes src/assets/frame/b/{header,footer}.png
+    python3 scripts/generate-frame.py            # writes src/assets/frame/{header,footer}.png
 
 Deterministic (fixed seeds). The left `CLEAR` fraction of each image is kept free of
 filaments so nothing hot sits behind the site name (design issue C5).
@@ -14,7 +14,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 from scipy.ndimage import gaussian_filter
 
-OUT = Path(__file__).resolve().parent.parent / "src/assets/frame/b"
+OUT = Path(__file__).resolve().parent.parent / "src/assets/frame"
 SS = 2  # supersampling for anti-aliased filaments
 
 # Palette sampled from the ESA image (navy field) and the design tokens (ember).
