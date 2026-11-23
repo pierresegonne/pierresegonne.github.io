@@ -1,7 +1,7 @@
 export const SITE = {
   name: 'Pierre Segonne',
-  tagline: 'Lead Engineer',
-  description: 'Pierre Segonne, Lead Engineer. Writing about data science, energy and engineering leadership.',
+  tagline: 'Forward Deployed Engineer',
+  description: 'Pierre Segonne, Forward Deployed Engineer. Writing about data science, energy and engineering leadership.',
   nav: [
     { href: '/', label: 'Posts' },
     { href: '/talks/', label: 'Talks' },
